@@ -1,5 +1,6 @@
 
 import dao.HibernateConfiguracao;
+import view.FrmLogin;
 import view.FrmManterCasa;
 import view.FrmManterPessoa;
 
@@ -35,6 +36,7 @@ public class Principal extends javax.swing.JFrame {
 
         jBtnExibirPessoa = new javax.swing.JButton();
         jBtnExibirCasa = new javax.swing.JButton();
+        jBtnExibirLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +61,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnExibirLogin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jBtnExibirLogin.setText("Login");
+        jBtnExibirLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExibirLoginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,14 +77,17 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jBtnExibirPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 374, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 233, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnExibirPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 245, Short.MAX_VALUE))
         );
 
@@ -92,6 +105,13 @@ public class Principal extends javax.swing.JFrame {
         telaCasa.setVisible(true);
         telaCasa.setLocationRelativeTo(this);
     }//GEN-LAST:event_jBtnExibirCasaActionPerformed
+
+    private void jBtnExibirLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExibirLoginActionPerformed
+        FrmLogin telaLogin = new FrmLogin();
+        telaLogin.setVisible(true);
+        telaLogin.hideThings();
+        telaLogin.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jBtnExibirLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,6 +153,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnExibirCasa;
+    private javax.swing.JButton jBtnExibirLogin;
     private javax.swing.JButton jBtnExibirPessoa;
     // End of variables declaration//GEN-END:variables
 }

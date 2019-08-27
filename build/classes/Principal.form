@@ -27,7 +27,9 @@
               <Component id="jBtnExibirPessoa" min="-2" pref="135" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jBtnExibirCasa" min="-2" pref="135" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="374" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jBtnExibirLogin" min="-2" pref="135" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="233" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -37,6 +39,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBtnExibirPessoa" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
                   <Component id="jBtnExibirCasa" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="jBtnExibirLogin" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="245" max="32767" attributes="0"/>
           </Group>
@@ -71,6 +74,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnExibirCasaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBtnExibirLogin">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Login"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnExibirLoginActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
