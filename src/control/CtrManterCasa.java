@@ -24,8 +24,7 @@ public class CtrManterCasa {
     
     public List carregarCasas() {
         try {
-            return acessoHibernatecasa.carregarTudoOrdenado(Casa.class,
-"nome");
+            return acessoHibernatecasa.carregarTudoOrdenado(Casa.class,"nome");
         } catch (HibernateException e) {
                 return null;
         }

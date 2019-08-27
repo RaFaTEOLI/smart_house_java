@@ -1,6 +1,10 @@
 package dao;
 
+import model.Aparelho;
+import model.Casa;
+import model.Morador;
 import model.Pessoa;
+import model.Quarto;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -23,7 +27,11 @@ public class HibernateConfiguracao {
     public void criaSessionFactory() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Pessoa.class);
-        //ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+        configuration.addAnnotatedClass(Casa.class);
+        configuration.addAnnotatedClass(Morador.class);
+        configuration.addAnnotatedClass(Quarto.class);
+        configuration.addAnnotatedClass(Aparelho.class);
+        
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
  

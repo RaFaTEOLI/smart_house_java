@@ -6,6 +6,10 @@
 package view;
 
 import control.CtrManterPessoa;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import model.Pessoa;
 
@@ -48,7 +52,13 @@ public class FrmManterPessoa extends javax.swing.JFrame {
         jLstPessoas = new javax.swing.JList();
         jBtnAlterar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pessoas");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jBtnIncluir.setText("Incluir");
         jBtnIncluir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,7 +110,6 @@ public class FrmManterPessoa extends javax.swing.JFrame {
 
         jBtnAlterar.setText("Alterar");
         jBtnAlterar.setToolTipText("");
-        jBtnAlterar.setActionCommand("Alterar");
         jBtnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBtnAlterarMouseClicked(evt);
@@ -185,6 +194,10 @@ public class FrmManterPessoa extends javax.swing.JFrame {
         pessoa.setUsuario(jTxtUsuario.getText());
         pessoa.setSenha(jPasswordSenha.getText());
         if (ctrManterPessoa.gravarPessoa(pessoa) == 1) {
+            jTxtNome.setText("");
+            jTxtSobrenome.setText("");
+            jTxtUsuario.setText("");
+            jPasswordSenha.setText("");  
             JOptionPane.showMessageDialog(null, "Objeto persistido");
         } else {
             JOptionPane.showMessageDialog(null, "Objeto não persistido");
@@ -199,6 +212,10 @@ public class FrmManterPessoa extends javax.swing.JFrame {
         pessoa = (Pessoa) jLstPessoas.getSelectedValue();
         if (pessoa != null) {
             if (ctrManterPessoa.excluirPessoas(pessoa)) {
+                jTxtNome.setText("");
+                jTxtSobrenome.setText("");
+                jTxtUsuario.setText("");
+                jPasswordSenha.setText("");  
                 JOptionPane.showMessageDialog(null, "Objeto Excluído");
             } else {
                 JOptionPane.showMessageDialog(null, "Objeto não excluído");
@@ -228,6 +245,10 @@ public class FrmManterPessoa extends javax.swing.JFrame {
               jTxtUsuario.setText(pessoa.getUsuario());
               jPasswordSenha.setText(pessoa.getSenha());  
             if (ctrManterPessoa.alterarPessoa(pessoa)) {
+                jTxtNome.setText("");
+                jTxtSobrenome.setText("");
+                jTxtUsuario.setText("");
+                jPasswordSenha.setText("");  
                 JOptionPane.showMessageDialog(null, "Objeto persistido");
             } else {
                 JOptionPane.showMessageDialog(null, "Objeto não persistido");
@@ -236,6 +257,20 @@ public class FrmManterPessoa extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Objeto não localizado");
          }   
     }//GEN-LAST:event_jBtnAlterarMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        DefaultListModel listModel = new DefaultListModel();
+        List listPessoa = new ArrayList();
+        listPessoa = ctrManterPessoa.carregarPessoas();
+        if (listPessoa != null) {
+            Iterator i = listPessoa.iterator();
+            while (i.hasNext()) {
+                Pessoa pessoaList = (Pessoa) i.next();
+                listModel.addElement(pessoaList);
+            }    
+            jLstPessoas.setModel(listModel); 
+        }  
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

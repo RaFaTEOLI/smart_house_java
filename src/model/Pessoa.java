@@ -9,12 +9,11 @@ import javax.persistence.Id;
 
 @Entity
 public class Pessoa implements Serializable {
-    
     @Id
     @Column(unique=true)
     @GeneratedValue (strategy=GenerationType.IDENTITY)
+    private Integer pessoaid;
     
-    private Integer pessoaId;
     private String nome;
     private String sobrenome;
     private String usuario;
@@ -27,14 +26,14 @@ public class Pessoa implements Serializable {
      * @return the id
      */
     public Integer getId() {
-        return pessoaId;
+        return pessoaid;
     }
 
     /**
      * @param id the id to set
      */
     public void setId(Integer id) {
-        this.pessoaId = id;
+        this.pessoaid = id;
     }
 
     /**
@@ -91,6 +90,19 @@ public class Pessoa implements Serializable {
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    
+    public String toString() {
+        return this.getNome();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+            if (this.getId().equals(((Pessoa)obj).getId())) {
+                result = true;
+            }
+        return result;
     }
 
    

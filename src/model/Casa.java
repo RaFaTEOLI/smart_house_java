@@ -6,33 +6,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Casa implements Serializable {
-    
     @Id
     @Column(unique=true)
     @GeneratedValue (strategy=GenerationType.IDENTITY)
+    private Integer casaid;
     
-    private Integer casaId;
-    // Herda o Id da Pessoa para o inserir o proprietario
+    @ManyToOne
+    @JoinColumn(name="proprietarioid")
+    private Pessoa proprietarioid;
+    
     private String nome;
     private String endereco;
     private String cidade;
     private String cep;
+    
+    
 
     /**
      * @return the casaId
      */
     public Integer getCasaId() {
-        return casaId;
+        return casaid;
     }
 
     /**
      * @param casaId the casaId to set
      */
     public void setCasaId(Integer casaId) {
-        this.casaId = casaId;
+        this.casaid = casaId;
     }
 
     /**
@@ -89,6 +95,25 @@ public class Casa implements Serializable {
      */
     public void setCep(String cep) {
         this.cep = cep;
+    }
+    
+    /**
+     * @return the pessoa
+     */
+    public Pessoa getPessoa() {
+        return proprietarioid;
+    }
+
+    /**
+     * @param pessoa the pessoa to set
+     */
+    public void setPessoa(Pessoa pessoa) {
+        this.proprietarioid = pessoa;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getNome();
     }
     
 }

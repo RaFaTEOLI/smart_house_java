@@ -7,8 +7,17 @@ package view;
 
 import control.CtrManterCasa;
 import control.CtrManterPessoa;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import model.Casa;
+import model.Pessoa;
 
 /**
  *
@@ -17,12 +26,17 @@ import model.Casa;
 public class FrmManterCasa extends javax.swing.JFrame {
 
     CtrManterCasa ctrManterCasa;
+    CtrManterPessoa ctrManterPessoa;
     Casa casa;
+    Pessoa pessoa;
     /**
      * Creates new form FrmManterCasa
      */
     public FrmManterCasa() {
+        ctrManterPessoa = new CtrManterPessoa();
         ctrManterCasa = new CtrManterCasa();
+        casa = new Casa();
+        pessoa = new Pessoa();
         initComponents();
     }
 
@@ -36,24 +50,30 @@ public class FrmManterCasa extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelNome = new javax.swing.JLabel();
-        jLabelDescricao = new javax.swing.JLabel();
         jLabelEndereco = new javax.swing.JLabel();
         jLabelCidade = new javax.swing.JLabel();
         jLabelCep = new javax.swing.JLabel();
         jLabelDono = new javax.swing.JLabel();
-        jTxtDescricao = new javax.swing.JTextField();
         jTxtNome = new javax.swing.JTextField();
         jTxtEndereco = new javax.swing.JTextField();
         jTxtCidade = new javax.swing.JTextField();
         jTxtCep = new javax.swing.JTextField();
-        jComboBoxPessoas = new javax.swing.JComboBox<>();
+        jCbxProprietarios = new javax.swing.JComboBox();
         jBtnIncluir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLstCasas = new javax.swing.JList();
+        jBtnExcluir = new javax.swing.JButton();
+        jBtnAlterar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Casas");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabelNome.setText("Nome: ");
-
-        jLabelDescricao.setText("Descrição:");
 
         jLabelEndereco.setText("Endereço:");
 
@@ -62,12 +82,6 @@ public class FrmManterCasa extends javax.swing.JFrame {
         jLabelCep.setText("CEP:");
 
         jLabelDono.setText("Proprietário:");
-
-        jTxtDescricao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtDescricaoActionPerformed(evt);
-            }
-        });
 
         jTxtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,12 +107,42 @@ public class FrmManterCasa extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxPessoas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jBtnIncluir.setText("Incluir");
         jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnIncluirActionPerformed(evt);
+            }
+        });
+
+        jLstCasas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jLstCasas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLstCasasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jLstCasas);
+
+        jBtnExcluir.setText("Excluir");
+        jBtnExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnExcluirMouseClicked(evt);
+            }
+        });
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
+
+        jBtnAlterar.setText("Alterar");
+        jBtnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAlterarMouseClicked(evt);
+            }
+        });
+        jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarActionPerformed(evt);
             }
         });
 
@@ -107,72 +151,72 @@ public class FrmManterCasa extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNome)
-                            .addComponent(jLabelCidade)
-                            .addComponent(jLabelDono)
-                            .addComponent(jLabelCep))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxtNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBoxPessoas, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTxtCep, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTxtCidade)))
+                            .addComponent(jLabelEndereco)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelNome)
+                                    .addComponent(jLabelCidade)
+                                    .addComponent(jLabelDono)
+                                    .addComponent(jLabelCep))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTxtEndereco)
+                                    .addComponent(jTxtCep)
+                                    .addComponent(jCbxProprietarios, 0, 273, Short.MAX_VALUE)
+                                    .addComponent(jTxtCidade)
+                                    .addComponent(jTxtNome))))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelEndereco)
-                        .addGap(22, 22, 22)
-                        .addComponent(jTxtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelDescricao)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTxtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
-                .addGap(111, 111, 111))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(jBtnIncluir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jBtnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97)
+                        .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(jBtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelNome)
+                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelEndereco)
+                            .addComponent(jTxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelCidade)
+                            .addComponent(jTxtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelCep)
+                            .addComponent(jTxtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelDono)
+                            .addComponent(jCbxProprietarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNome)
-                    .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDescricao)
-                    .addComponent(jTxtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEndereco)
-                    .addComponent(jTxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCidade)
-                    .addComponent(jTxtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCep)
-                    .addComponent(jTxtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDono)
-                    .addComponent(jComboBoxPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jBtnIncluir)
-                .addGap(21, 21, 21))
+                    .addComponent(jBtnIncluir)
+                    .addComponent(jBtnExcluir)
+                    .addComponent(jBtnAlterar))
+                .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTxtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtDescricaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtDescricaoActionPerformed
 
     private void jTxtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNomeActionPerformed
         // TODO add your handling code here:
@@ -191,18 +235,130 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtCepActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+        pessoa = (Pessoa) jCbxProprietarios.getSelectedItem();
         casa = new Casa();
-        //casa.setCasaId(jComboBoxPessoas.getSelectedItem());
+        // atribui valores
         casa.setNome(jTxtNome.getText());
+        casa.setPessoa(pessoa);
         casa.setEndereco(jTxtEndereco.getText());
         casa.setCidade(jTxtCidade.getText());
         casa.setCep(jTxtCep.getText());
         if (ctrManterCasa.gravarCasa(casa) == 1) {
+            casa.setNome("");
+            casa.setEndereco("");
+            casa.setCidade("");
+            casa.setCep("");
             JOptionPane.showMessageDialog(null, "Objeto persistido");
         } else {
             JOptionPane.showMessageDialog(null, "Objeto não persistido");
         }
     }//GEN-LAST:event_jBtnIncluirActionPerformed
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
+
+    private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
+        //recupera a casa selecionado
+        casa = (Casa) jLstCasas.getSelectedValue();
+        //exclui o funcionario
+        if (ctrManterCasa.excluirCasa(casa)) {
+            casa.setNome("");
+            casa.setEndereco("");
+            casa.setCidade("");
+            casa.setCep("");
+            JOptionPane.showMessageDialog(this, "Objeto excluido");
+        } else {
+            JOptionPane.showMessageDialog(this, "Objeto não excluido");
+        }
+    }//GEN-LAST:event_jBtnExcluirMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+         //inicia os atributos
+        ctrManterCasa = new CtrManterCasa();
+        ctrManterPessoa = new CtrManterPessoa();
+        pessoa = new Pessoa();
+        casa = new Casa();
+        DefaultListModel listModel = new DefaultListModel();
+        List listCasa = new ArrayList();
+        listCasa = ctrManterCasa.carregarCasas();
+        
+        if (listCasa != null) {
+            Iterator i = listCasa.iterator();
+            while (i.hasNext()) {
+                Casa casaList = (Casa) i.next();
+                listModel.addElement(casaList);
+            }
+        }
+        jLstCasas.setModel(listModel);
+        
+        //carrega combo de departamentos
+        DefaultComboBoxModel modelCombo = new DefaultComboBoxModel();
+        List listPessoa = ctrManterPessoa.carregarPessoas();
+        
+        if (listPessoa != null) {
+            Iterator j = listPessoa.iterator();
+            while (j.hasNext()) {
+                Pessoa pessoaList = (Pessoa) j.next();
+                modelCombo.addElement(pessoaList);
+            }
+            jCbxProprietarios.setModel(modelCombo);
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
+        //recupera o funcionario e o departamento selecionado
+        casa = (Casa) jLstCasas.getSelectedValue();
+        pessoa = (Pessoa) jCbxProprietarios.getSelectedItem();
+        
+        if (casa != null) {
+            //atribui os valores
+            casa.setNome(jTxtNome.getText());
+            casa.setEndereco(jTxtEndereco.getText());
+            casa.setCidade(jTxtCidade.getText());
+            casa.setCep(jTxtCep.getText());
+            casa.setPessoa(pessoa);
+            
+            //altera objeto
+            if (ctrManterCasa.alterarCasa(casa)) {
+                casa.setNome("");
+                casa.setEndereco("");
+                casa.setCidade("");
+                casa.setCep("");
+                JOptionPane.showMessageDialog(this, "Objeto persistido");
+            } else {
+                JOptionPane.showMessageDialog(this, "Objeto não persistido");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Objeto não localizado");
+        }
+    }//GEN-LAST:event_jBtnAlterarMouseClicked
+
+    private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnAlterarActionPerformed
+
+    private void jLstCasasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLstCasasMouseClicked
+       //recupera o funcionario selecionado
+       casa = (Casa) jLstCasas.getSelectedValue();
+       //apresenta os dados do funcionario
+       if (casa != null) {
+            jTxtNome.setText(casa.getNome());
+            jTxtEndereco.setText(casa.getEndereco());
+            jTxtCidade.setText(casa.getCidade());
+            jTxtCep.setText(casa.getCep());
+            int count;
+            //apresenta o departamento do funcionario
+            for (count = 0; count < jCbxProprietarios.getModel().getSize(); count++) {
+               if (((Pessoa)jCbxProprietarios.getModel().getElementAt(count)).equals(casa.getPessoa())) {
+                   jCbxProprietarios.setSelectedIndex(count);
+                   break;
+               }
+           }
+       } else {
+           JOptionPane.showMessageDialog(null, "Objeto não Encontrado!");
+       }
+    }//GEN-LAST:event_jLstCasasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -240,17 +396,19 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnAlterar;
+    private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnIncluir;
-    private javax.swing.JComboBox<String> jComboBoxPessoas;
+    private javax.swing.JComboBox jCbxProprietarios;
     private javax.swing.JLabel jLabelCep;
     private javax.swing.JLabel jLabelCidade;
-    private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelDono;
     private javax.swing.JLabel jLabelEndereco;
     private javax.swing.JLabel jLabelNome;
+    private javax.swing.JList jLstCasas;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTxtCep;
     private javax.swing.JTextField jTxtCidade;
-    private javax.swing.JTextField jTxtDescricao;
     private javax.swing.JTextField jTxtEndereco;
     private javax.swing.JTextField jTxtNome;
     // End of variables declaration//GEN-END:variables
