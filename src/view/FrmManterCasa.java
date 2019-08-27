@@ -8,7 +8,7 @@ package view;
 import control.CtrManterCasa;
 import control.CtrManterPessoa;
 import javax.swing.JOptionPane;
-import model.Casas;
+import model.Casa;
 
 /**
  *
@@ -17,7 +17,7 @@ import model.Casas;
 public class FrmManterCasa extends javax.swing.JFrame {
 
     CtrManterCasa ctrManterCasa;
-    Casas casa;
+    Casa casa;
     /**
      * Creates new form FrmManterCasa
      */
@@ -191,7 +191,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtCepActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        casa = new Casas();
+        casa = new Casa();
         //casa.setCasaId(jComboBoxPessoas.getSelectedItem());
         casa.setNome(jTxtNome.getText());
         casa.setEndereco(jTxtEndereco.getText());

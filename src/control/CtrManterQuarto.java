@@ -2,7 +2,7 @@ package control;
 
 import dao.DaoQuarto;
 import java.util.List;
-import model.Quartos;
+import model.Quarto;
 import org.hibernate.HibernateException;
 
 public class CtrManterQuarto {
@@ -12,7 +12,7 @@ public class CtrManterQuarto {
         acessoHibernateQuarto = new DaoQuarto();
     }
     
-    public int gravarQuarto(Quartos quarto) {
+    public int gravarQuarto(Quarto quarto) {
         try {
             acessoHibernateQuarto.gravar(quarto);
             return 1;
@@ -24,14 +24,14 @@ public class CtrManterQuarto {
     
     public List carregarQuartos() {
         try {
-            return acessoHibernateQuarto.carregarTudoOrdenado(Quartos.class,
+            return acessoHibernateQuarto.carregarTudoOrdenado(Quarto.class,
 "nome");
         } catch (HibernateException e) {
                 return null;
         }
     }
     
-    public boolean excluirQuarto(Quartos quarto) {
+    public boolean excluirQuarto(Quarto quarto) {
         try {
             acessoHibernateQuarto.excluir(quarto);
             return true;
@@ -41,7 +41,7 @@ public class CtrManterQuarto {
         }
     }
     
-    public boolean alterarQuarto(Quartos quarto) {
+    public boolean alterarQuarto(Quarto quarto) {
         try {
             acessoHibernateQuarto.alterar(quarto);
             return true;

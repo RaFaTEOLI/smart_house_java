@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Casas implements Serializable {
+public class Casa implements Serializable {
     
     @Id
     @Column(unique=true)

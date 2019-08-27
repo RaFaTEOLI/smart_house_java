@@ -2,7 +2,7 @@ package control;
 
 import dao.DaoMorador;
 import java.util.List;
-import model.Moradores;
+import model.Morador;
 import org.hibernate.HibernateException;
 
 public class CtrManterMorador {
@@ -12,7 +12,7 @@ public class CtrManterMorador {
         acessoHibernateMorador = new DaoMorador();
     }
     
-    public int gravarMorador(Moradores morador) {
+    public int gravarMorador(Morador morador) {
         try {
             acessoHibernateMorador.gravar(morador);
             return 1;
@@ -24,14 +24,14 @@ public class CtrManterMorador {
     
     public List carregarMorador() {
         try {
-            return acessoHibernateMorador.carregarTudoOrdenado(Moradores.class,
+            return acessoHibernateMorador.carregarTudoOrdenado(Morador.class,
 "nome");
         } catch (HibernateException e) {
                 return null;
         }
     }
     
-    public boolean excluirMorador(Moradores morador) {
+    public boolean excluirMorador(Morador morador) {
         try {
             acessoHibernateMorador.excluir(morador);
             return true;
@@ -41,7 +41,7 @@ public class CtrManterMorador {
         }
     }
     
-    public boolean alterarMorador(Moradores morador) {
+    public boolean alterarMorador(Morador morador) {
         try {
             acessoHibernateMorador.alterar(morador);
             return true;

@@ -2,7 +2,7 @@ package control;
 
 import dao.DaoCasa;
 import java.util.List;
-import model.Casas;
+import model.Casa;
 import org.hibernate.HibernateException;
 
 public class CtrManterCasa {
@@ -12,7 +12,7 @@ public class CtrManterCasa {
         acessoHibernatecasa = new DaoCasa();
     }
     
-    public int gravarCasa(Casas casa) {
+    public int gravarCasa(Casa casa) {
         try {
             acessoHibernatecasa.gravar(casa);
             return 1;
@@ -24,14 +24,14 @@ public class CtrManterCasa {
     
     public List carregarCasas() {
         try {
-            return acessoHibernatecasa.carregarTudoOrdenado(Casas.class,
+            return acessoHibernatecasa.carregarTudoOrdenado(Casa.class,
 "nome");
         } catch (HibernateException e) {
                 return null;
         }
     }
     
-    public boolean excluirCasa(Casas casa) {
+    public boolean excluirCasa(Casa casa) {
         try {
             acessoHibernatecasa.excluir(casa);
             return true;
@@ -41,7 +41,7 @@ public class CtrManterCasa {
         }
     }
     
-    public boolean alterarCasa(Casas casa) {
+    public boolean alterarCasa(Casa casa) {
         try {
             acessoHibernatecasa.alterar(casa);
             return true;

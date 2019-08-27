@@ -2,7 +2,7 @@ package control;
 
 import dao.DaoAparelho;
 import java.util.List;
-import model.Aparelhos;
+import model.Aparelho;
 import org.hibernate.HibernateException;
 
 public class CtrManterAparelho {
@@ -12,7 +12,7 @@ public class CtrManterAparelho {
         acessoHibernateAparelho = new DaoAparelho();
     }
     
-    public int gravarAparelho(Aparelhos aparelho) {
+    public int gravarAparelho(Aparelho aparelho) {
         try {
             acessoHibernateAparelho.gravar(aparelho);
             return 1;
@@ -24,14 +24,14 @@ public class CtrManterAparelho {
     
     public List carregarAparelho() {
         try {
-            return acessoHibernateAparelho.carregarTudoOrdenado(Aparelhos.class,
+            return acessoHibernateAparelho.carregarTudoOrdenado(Aparelho.class,
 "nome");
         } catch (HibernateException e) {
                 return null;
         }
     }
     
-    public boolean excluirAparelho(Aparelhos aparelho) {
+    public boolean excluirAparelho(Aparelho aparelho) {
         try {
             acessoHibernateAparelho.excluir(aparelho);
             return true;
@@ -41,7 +41,7 @@ public class CtrManterAparelho {
         }
     }
     
-    public boolean alterarAparelho(Aparelhos aparelho) {
+    public boolean alterarAparelho(Aparelho aparelho) {
         try {
             acessoHibernateAparelho.alterar(aparelho);
             return true;

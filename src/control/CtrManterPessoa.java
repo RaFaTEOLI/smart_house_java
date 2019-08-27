@@ -2,7 +2,7 @@ package control;
 
 import dao.DaoPessoa;
 import java.util.List;
-import model.Pessoas;
+import model.Pessoa;
 import org.hibernate.HibernateException;
 
 public class CtrManterPessoa {
@@ -12,7 +12,7 @@ public class CtrManterPessoa {
         acessohibernatepessoa = new DaoPessoa();
     }
     
-    public int gravarPessoa(Pessoas pessoa) {
+    public int gravarPessoa(Pessoa pessoa) {
         try {
             acessohibernatepessoa.gravar(pessoa);
             return 1;
@@ -24,14 +24,14 @@ public class CtrManterPessoa {
     
     public List carregarPessoas() {
         try {
-            return acessohibernatepessoa.carregarTudoOrdenado(Pessoas.class,
+            return acessohibernatepessoa.carregarTudoOrdenado(Pessoa.class,
 "nome");
             } catch (HibernateException e) {
                 return null;
             }
     }
     
-    public boolean excluirPessoas(Pessoas pessoa) {
+    public boolean excluirPessoas(Pessoa pessoa) {
         try {
             acessohibernatepessoa.excluir(pessoa);
             return true;
@@ -41,7 +41,7 @@ public class CtrManterPessoa {
         }
     }
     
-    public boolean alterarPessoa(Pessoas pessoa) {
+    public boolean alterarPessoa(Pessoa pessoa) {
         try {
             acessohibernatepessoa.alterar(pessoa);
             return true;

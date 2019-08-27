@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Pessoas implements Serializable {
+public class Pessoa implements Serializable {
     
     @Id
     @Column(unique=true)
@@ -20,7 +20,7 @@ public class Pessoas implements Serializable {
     private String usuario;
     private String senha;
     
-    public Pessoas() {
+    public Pessoa() {
     }
 
     /**
