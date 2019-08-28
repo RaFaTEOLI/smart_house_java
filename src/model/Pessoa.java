@@ -93,7 +93,7 @@ public class Pessoa implements Serializable {
     }
     
     public String toString() {
-        return this.getNome();
+        return this.getNome() + " " + this.getSobrenome();
     }
     
     @Override

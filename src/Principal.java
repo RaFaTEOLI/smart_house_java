@@ -2,6 +2,7 @@
 import dao.HibernateConfiguracao;
 import view.FrmLogin;
 import view.FrmManterCasa;
+import view.FrmManterMorador;
 import view.FrmManterPessoa;
 
 /*
@@ -15,7 +16,6 @@ import view.FrmManterPessoa;
  * @author lab
  */
 public class Principal extends javax.swing.JFrame {
-
     /**
      * Creates new form Principal
      */
@@ -37,8 +37,10 @@ public class Principal extends javax.swing.JFrame {
         jBtnExibirPessoa = new javax.swing.JButton();
         jBtnExibirCasa = new javax.swing.JButton();
         jBtnExibirLogin = new javax.swing.JButton();
+        jBtnExibirMorador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Smart House");
 
         jBtnExibirPessoa.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jBtnExibirPessoa.setText("Pessoas");
@@ -46,7 +48,6 @@ public class Principal extends javax.swing.JFrame {
         jBtnExibirPessoa.setFocusPainted(false);
         jBtnExibirPessoa.setFocusable(false);
         jBtnExibirPessoa.setOpaque(false);
-        jBtnExibirPessoa.setRolloverEnabled(true);
         jBtnExibirPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnExibirPessoaActionPerformed(evt);
@@ -69,6 +70,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnExibirMorador.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jBtnExibirMorador.setText("Moradores");
+        jBtnExibirMorador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExibirMoradorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,7 +88,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 233, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,8 +98,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnExibirPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 245, Short.MAX_VALUE))
+                    .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,6 +124,12 @@ public class Principal extends javax.swing.JFrame {
         telaLogin.hideThings();
         telaLogin.setLocationRelativeTo(this);
     }//GEN-LAST:event_jBtnExibirLoginActionPerformed
+
+    private void jBtnExibirMoradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExibirMoradorActionPerformed
+        FrmManterMorador telaMorador = new FrmManterMorador();
+        telaMorador.setVisible(true);
+        telaMorador.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jBtnExibirMoradorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +172,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnExibirCasa;
     private javax.swing.JButton jBtnExibirLogin;
+    private javax.swing.JButton jBtnExibirMorador;
     private javax.swing.JButton jBtnExibirPessoa;
     // End of variables declaration//GEN-END:variables
 }

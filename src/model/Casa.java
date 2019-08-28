@@ -113,7 +113,7 @@ public class Casa implements Serializable {
     
     @Override
     public String toString() {
-        return this.getNome();
+        return this.casaid + " - " + this.getNome();
     }
     
 }
