@@ -188,20 +188,24 @@ public class FrmManterPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtSobrenomeActionPerformed
 
     private void jBtnIncluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnIncluirMouseClicked
-        pessoa = new Pessoa();
-        pessoa.setNome(jTxtNome.getText());
-        pessoa.setSobrenome(jTxtSobrenome.getText());
-        pessoa.setUsuario(jTxtUsuario.getText());
-        pessoa.setSenha(jPasswordSenha.getText());
-        if (ctrManterPessoa.gravarPessoa(pessoa) == 1) {
-            jTxtNome.setText("");
-            jTxtSobrenome.setText("");
-            jTxtUsuario.setText("");
-            jPasswordSenha.setText("");  
-            JOptionPane.showMessageDialog(null, "Objeto persistido");
-        } else {
-            JOptionPane.showMessageDialog(null, "Objeto não persistido");
+        if (validaCampos() == 1) {
+           pessoa = new Pessoa();
+           pessoa.setNome(jTxtNome.getText());
+           pessoa.setSobrenome(jTxtSobrenome.getText());
+           pessoa.setUsuario(jTxtUsuario.getText());
+           pessoa.setSenha(jPasswordSenha.getText());
+           
+           if (ctrManterPessoa.gravarPessoa(pessoa) == 1) {
+                jTxtNome.setText("");
+                jTxtSobrenome.setText("");
+                jTxtUsuario.setText("");
+                jPasswordSenha.setText("");  
+                JOptionPane.showMessageDialog(null, "Objeto persistido");
+            } else {
+                JOptionPane.showMessageDialog(null, "Objeto não persistido");
+            } 
         }
+        
     }//GEN-LAST:event_jBtnIncluirMouseClicked
 
     private void jTxtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtUsuarioActionPerformed
@@ -272,6 +276,14 @@ public class FrmManterPessoa extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_formWindowActivated
 
+    public int validaCampos() {
+        if (jTxtNome.getText() == null ||  jTxtSobrenome.getText() == null || jTxtUsuario.getText() == null || jPasswordSenha.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Favor Preencher Todos Os Campos!");
+            return 2;
+        } else {
+            return 1;
+        }
+    }
     /**
      * @param args the command line arguments
      */
