@@ -9,7 +9,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class DaoGenerico {
-    protected HibernateConfiguracao hibernateConfiguracao;
+    public HibernateConfiguracao hibernateConfiguracao;
     
     public DaoGenerico() {
         hibernateConfiguracao = new HibernateConfiguracao();

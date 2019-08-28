@@ -26,13 +26,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTxtUsuario" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jTxtUsuario" alignment="0" pref="135" max="32767" attributes="0"/>
                   <Component id="jLabelSenha" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPasswordSenha" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                  <Component id="jBtnCriar" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                  <Component id="jBtnLogin" min="-2" pref="135" max="-2" attributes="0"/>
+                  <Component id="jBtnCriar" alignment="0" pref="135" max="32767" attributes="0"/>
+                  <Component id="jBtnLogin" pref="135" max="32767" attributes="0"/>
+                  <Component id="jPasswordSenha" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -66,16 +66,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelCadastre" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace pref="46" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabelUsuario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTxtUsuario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabelSenha" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPasswordSenha" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabelNome" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -84,15 +75,25 @@
                       <Component id="jLabelSobrenome" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTxtSobrenome" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="jLabelCUsuario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTxtCUsuario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabelCSenha" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabelUsuario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTxtUsuario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabelSenha" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPasswordSenha" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="jLabelCUsuario" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTxtCUsuario" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabelCSenha" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPasswordCSenha" min="-2" max="-2" attributes="0"/>
@@ -125,8 +126,6 @@
         <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jPasswordSenha">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelSenha">
       <Properties>
         <Property name="text" type="java.lang.String" value="Senha"/>
@@ -136,6 +135,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Entrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnLoginMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnCadastre">
       <Properties>
@@ -196,6 +198,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordCSenha">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="jPasswordSenha">
     </Component>
   </SubComponents>
 </Form>

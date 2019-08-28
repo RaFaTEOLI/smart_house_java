@@ -6,8 +6,14 @@
 package view;
 
 import control.CtrManterPessoa;
+import dao.DaoGenerico;
+import dao.DaoLogin;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Pessoa;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -35,7 +41,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jTxtUsuario = new javax.swing.JTextField();
         jLabelUsuario = new javax.swing.JLabel();
-        jPasswordSenha = new javax.swing.JTextField();
         jLabelSenha = new javax.swing.JLabel();
         jBtnLogin = new javax.swing.JButton();
         jBtnCadastre = new javax.swing.JButton();
@@ -50,6 +55,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabelCSenha = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPasswordCSenha = new javax.swing.JPasswordField();
+        jPasswordSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -59,6 +65,11 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabelSenha.setText("Senha");
 
         jBtnLogin.setText("Entrar");
+        jBtnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnLoginMouseClicked(evt);
+            }
+        });
 
         jBtnCadastre.setText("Confirmar");
         jBtnCadastre.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -94,13 +105,13 @@ public class FrmLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTxtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                     .addComponent(jLabelSenha)
                     .addComponent(jLabelUsuario)
-                    .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBtnCriar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(jBtnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(jPasswordSenha))
                 .addGap(131, 131, 131)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelCadastre, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,30 +138,31 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelCadastre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelSenha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelSobrenome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 8, 8)
-                .addComponent(jLabelCUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtCUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelCSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabelCUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtCUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelCSenha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelSenha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPasswordCSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,6 +214,22 @@ public class FrmLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Objeto não persistido");
         }
     }//GEN-LAST:event_jBtnCadastreMouseClicked
+
+    private void jBtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLoginMouseClicked
+        DaoLogin d = new DaoLogin();
+       
+        System.out.println("LOG STATUS | Enviando valores do TextField para o Método de Validação...");
+        System.out.println("LOG STATUS | Usuário: " + jTxtUsuario.getText() + " Senha: " + jPasswordSenha.getText());
+        if (d.validaLogin(jTxtUsuario.getText(), jPasswordSenha.getText()) == 1) {
+            //Usuario Logado
+            System.out.println("LOG STATUS | Usuário Logado!");
+            JOptionPane.showMessageDialog(null, "Logado com sucesso");
+        } else {
+            //Usuario não encontrado
+            System.out.println("LOG STATUS | Usuário não encontrado!");
+            JOptionPane.showMessageDialog(null, "Usuário e senha incorretos!");
+        }
+    }//GEN-LAST:event_jBtnLoginMouseClicked
 
     public void hideThings() {
         jLabelCadastre.setVisible(false);
@@ -263,7 +291,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSobrenome;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPasswordField jPasswordCSenha;
-    private javax.swing.JTextField jPasswordSenha;
+    private javax.swing.JPasswordField jPasswordSenha;
     private javax.swing.JTextField jTxtCUsuario;
     private javax.swing.JTextField jTxtNome;
     private javax.swing.JTextField jTxtSobrenome;
