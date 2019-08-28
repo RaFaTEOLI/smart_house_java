@@ -170,7 +170,6 @@
     <Component class="javax.swing.JButton" name="jBtnAlterar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>
-        <Property name="actionCommand" type="java.lang.String" value="Alterar"/>
       </Properties>
     </Component>
   </SubComponents>

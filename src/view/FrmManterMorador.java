@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -131,6 +134,19 @@ public class FrmManterMorador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void carregaDataAtual() {
+        Calendar c = Calendar.getInstance();
+        Date data = c.getTime();
+         
+        System.out.println("LOG STATUS | Data Atual Gerada: " + data);
+         
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("LOG STATUS | Data Formatada: " + sdf.format(data));
+        
+        System.out.println("LOG STATUS | Setando Data Formatada no TextField: " + sdf.format(data));
+        jTxtDataCadastro.setText(sdf.format(data));
+    }
+    
     /**
      * @param args the command line arguments
      */
