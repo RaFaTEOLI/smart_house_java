@@ -22,6 +22,15 @@ import org.hibernate.Transaction;
 public class FrmLogin extends javax.swing.JFrame {
     CtrManterPessoa ctrManterPessoa;
     Pessoa pessoa;
+    boolean Logado;
+
+    public boolean getLogado() {
+        return Logado;
+    }
+
+    public void setLogado(boolean Logado) {
+        this.Logado = Logado;
+    }
     /**
      * Creates new form FrmLogin
      */
@@ -29,6 +38,7 @@ public class FrmLogin extends javax.swing.JFrame {
         ctrManterPessoa = new CtrManterPessoa();
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -184,16 +194,8 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCriarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCriarMouseClicked
-        jLabelCadastre.setVisible(true);
-        jLabelNome.setVisible(true);
-        jLabelSobrenome.setVisible(true);
-        jLabelCUsuario.setVisible(true);
-        jLabelCSenha.setVisible(true);
-        jTxtNome.setVisible(true);
-        jTxtSobrenome.setVisible(true);
-        jTxtCUsuario.setVisible(true);
-        jPasswordCSenha.setVisible(true);
-        jBtnCadastre.setVisible(true);
+        System.out.println("LOG STATUS | Clicou no Botão Criar Conta!");
+        showThings();
     }//GEN-LAST:event_jBtnCriarMouseClicked
 
     private void jBtnCadastreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadastreMouseClicked
@@ -209,9 +211,10 @@ public class FrmLogin extends javax.swing.JFrame {
             jPasswordSenha.setText("");
             jTxtCUsuario.setText("");
             jPasswordCSenha.setText("");  
-            JOptionPane.showMessageDialog(null, "Objeto persistido");
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado!");
+            hideThings();
         } else {
-            JOptionPane.showMessageDialog(null, "Objeto não persistido");
+            JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
         }
     }//GEN-LAST:event_jBtnCadastreMouseClicked
 
@@ -224,13 +227,16 @@ public class FrmLogin extends javax.swing.JFrame {
             //Usuario Logado
             System.out.println("LOG STATUS | Usuário Logado!");
             JOptionPane.showMessageDialog(null, "Logado com sucesso");
+            setLogado(true);
         } else {
             //Usuario não encontrado
             System.out.println("LOG STATUS | Usuário não encontrado!");
             JOptionPane.showMessageDialog(null, "Usuário e senha incorretos!");
+            setLogado(false);
         }
     }//GEN-LAST:event_jBtnLoginMouseClicked
 
+    
     public void hideThings() {
         jLabelCadastre.setVisible(false);
         jLabelNome.setVisible(false);
@@ -243,10 +249,24 @@ public class FrmLogin extends javax.swing.JFrame {
         jPasswordCSenha.setVisible(false);
         jBtnCadastre.setVisible(false);
     }
+    
+    public void showThings() {
+        jLabelCadastre.setVisible(true);
+        jLabelNome.setVisible(true);
+        jLabelSobrenome.setVisible(true);
+        jLabelCUsuario.setVisible(true);
+        jLabelCSenha.setVisible(true);
+        jTxtNome.setVisible(true);
+        jTxtSobrenome.setVisible(true);
+        jTxtCUsuario.setVisible(true);
+        jPasswordCSenha.setVisible(true);
+        jBtnCadastre.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

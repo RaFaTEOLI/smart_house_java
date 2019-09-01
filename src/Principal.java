@@ -62,6 +62,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnExibirLogin.setVisible(false);
         jBtnExibirLogin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jBtnExibirLogin.setText("Login");
         jBtnExibirLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -87,10 +88,12 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 88, Short.MAX_VALUE))
+                .addGap(0, 235, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(257, 257, 257)
+                .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,9 +101,10 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnExibirPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -135,9 +139,29 @@ public class Principal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        Principal telaPrincipal = new Principal();
-        telaPrincipal.setVisible(true);
-        telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
+        FrmLogin telaLogin = new FrmLogin();
+        
+        telaLogin.hideThings();
+        
+        while (telaLogin.getLogado() == false) {
+
+            telaLogin.setVisible(true);
+            if (telaLogin.getLogado() == true) {
+                telaLogin.setVisible(false);
+                System.out.println("LOG STATUS | Entrando no metodo para criar tela principal...");
+                Principal telaPrincipal = new Principal();
+                telaPrincipal.setVisible(true);
+                telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
+            }
+            
+        }
+        
+        System.out.println("LOG STATUS | Usuário Logado? " + telaLogin.getLogado());
+            
+        
+        //telaLogin.hideThings();
+        //telaLogin.setVisible(true);
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

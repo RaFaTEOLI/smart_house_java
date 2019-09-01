@@ -1,18 +1,18 @@
 package control;
 
-import dao.DaoQuarto;
+import dao.DaoComodo;
 import java.util.List;
-import model.Quarto;
+import model.Comodo;
 import org.hibernate.HibernateException;
 
-public class CtrManterQuarto {
-    DaoQuarto acessoHibernateQuarto;
+public class CtrManterComodo {
+    DaoComodo acessoHibernateQuarto;
     
-    public CtrManterQuarto() {
-        acessoHibernateQuarto = new DaoQuarto();
+    public CtrManterComodo() {
+        acessoHibernateQuarto = new DaoComodo();
     }
     
-    public int gravarQuarto(Quarto quarto) {
+    public int gravarQuarto(Comodo quarto) {
         try {
             acessoHibernateQuarto.gravar(quarto);
             return 1;
@@ -24,14 +24,14 @@ public class CtrManterQuarto {
     
     public List carregarQuartos() {
         try {
-            return acessoHibernateQuarto.carregarTudoOrdenado(Quarto.class,
+            return acessoHibernateQuarto.carregarTudoOrdenado(Comodo.class,
 "nome");
         } catch (HibernateException e) {
                 return null;
         }
     }
     
-    public boolean excluirQuarto(Quarto quarto) {
+    public boolean excluirQuarto(Comodo quarto) {
         try {
             acessoHibernateQuarto.excluir(quarto);
             return true;
@@ -41,7 +41,7 @@ public class CtrManterQuarto {
         }
     }
     
-    public boolean alterarQuarto(Quarto quarto) {
+    public boolean alterarQuarto(Comodo quarto) {
         try {
             acessoHibernateQuarto.alterar(quarto);
             return true;
