@@ -244,14 +244,15 @@ public class FrmManterCasa extends javax.swing.JFrame {
         casa.setEndereco(jTxtEndereco.getText());
         casa.setCidade(jTxtCidade.getText());
         casa.setCep(jTxtCep.getText());
+        System.out.println("LOG STATUS | Cadastrando Casa...");
         if (ctrManterCasa.gravarCasa(casa) == 1) {
             casa.setNome("");
             casa.setEndereco("");
             casa.setCidade("");
             casa.setCep("");
-            JOptionPane.showMessageDialog(null, "Objeto persistido");
+            JOptionPane.showMessageDialog(null, "Casa cadastrada!");
         } else {
-            JOptionPane.showMessageDialog(null, "Objeto não persistido");
+            JOptionPane.showMessageDialog(null, "Casa não cadastrada");
         }
         }
     }//GEN-LAST:event_jBtnIncluirActionPerformed
@@ -270,9 +271,9 @@ public class FrmManterCasa extends javax.swing.JFrame {
             casa.setEndereco("");
             casa.setCidade("");
             casa.setCep("");
-            JOptionPane.showMessageDialog(this, "Objeto excluido");
+            JOptionPane.showMessageDialog(this, "Casa excluida");
         } else {
-            JOptionPane.showMessageDialog(this, "Objeto não excluido");
+            JOptionPane.showMessageDialog(this, "Casa não excluida");
         }
         }
     }//GEN-LAST:event_jBtnExcluirMouseClicked
@@ -330,12 +331,12 @@ public class FrmManterCasa extends javax.swing.JFrame {
                     casa.setEndereco("");
                     casa.setCidade("");
                     casa.setCep("");
-                    JOptionPane.showMessageDialog(this, "Objeto persistido");
+                    JOptionPane.showMessageDialog(this, "Casa alterada!");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Objeto não persistido");
+                    JOptionPane.showMessageDialog(this, "Casa não alterada!");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Objeto não localizado");
+                JOptionPane.showMessageDialog(this, "Casa não localizada!");
             }
         }
     }//GEN-LAST:event_jBtnAlterarMouseClicked

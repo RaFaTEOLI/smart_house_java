@@ -200,9 +200,9 @@ public class FrmManterPessoa extends javax.swing.JFrame {
                 jTxtSobrenome.setText("");
                 jTxtUsuario.setText("");
                 jPasswordSenha.setText("");  
-                JOptionPane.showMessageDialog(null, "Objeto persistido");
+                JOptionPane.showMessageDialog(null, "Pessoa cadastrada!");
             } else {
-                JOptionPane.showMessageDialog(null, "Objeto não persistido");
+                JOptionPane.showMessageDialog(null, "Pessoa não cadastrada");
             } 
         }
         
@@ -221,9 +221,9 @@ public class FrmManterPessoa extends javax.swing.JFrame {
                 jTxtSobrenome.setText("");
                 jTxtUsuario.setText("");
                 jPasswordSenha.setText("");  
-                JOptionPane.showMessageDialog(null, "Objeto Excluído");
+                JOptionPane.showMessageDialog(null, "Pessoa excluída");
             } else {
-                JOptionPane.showMessageDialog(null, "Objeto não excluído");
+                JOptionPane.showMessageDialog(null, "Pessoa não excluída");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione o Objeto");
@@ -239,7 +239,7 @@ public class FrmManterPessoa extends javax.swing.JFrame {
               jTxtUsuario.setText(pessoa.getUsuario());
               jPasswordSenha.setText(pessoa.getSenha());
          } else {
-             JOptionPane.showMessageDialog(null, "Objeto não Encontrado!"); 
+             JOptionPane.showMessageDialog(null, "Pessoa não encontrada!"); 
          }
     }//GEN-LAST:event_jLstPessoasMouseClicked
 
@@ -256,12 +256,12 @@ public class FrmManterPessoa extends javax.swing.JFrame {
                 jTxtSobrenome.setText("");
                 jTxtUsuario.setText("");
                 jPasswordSenha.setText("");  
-                JOptionPane.showMessageDialog(null, "Objeto persistido");
+                JOptionPane.showMessageDialog(null, "Pessoa alterada!");
             } else {
-                JOptionPane.showMessageDialog(null, "Objeto não persistido");
+                JOptionPane.showMessageDialog(null, "Pessoa não alterada!");
             }
          } else {
-             JOptionPane.showMessageDialog(null, "Objeto não localizado");
+             JOptionPane.showMessageDialog(null, "Pessoa não localizada!");
          }
         }
     }//GEN-LAST:event_jBtnAlterarMouseClicked

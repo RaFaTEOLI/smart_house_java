@@ -205,6 +205,7 @@ public class FrmLogin extends javax.swing.JFrame {
         pessoa.setSobrenome(jTxtSobrenome.getText());
         pessoa.setUsuario(jTxtCUsuario.getText());
         pessoa.setSenha(jPasswordCSenha.getText());
+        System.out.println("LOG STATUS | Cadastrando Usuário...");
         if (ctrManterPessoa.gravarPessoa(pessoa) == 1) {
             jTxtNome.setText("");
             jTxtSobrenome.setText("");
