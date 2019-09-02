@@ -213,6 +213,7 @@ public class FrmManterPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtUsuarioActionPerformed
 
     private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
+        if (validaCampos() == 1) {
         pessoa = (Pessoa) jLstPessoas.getSelectedValue();
         if (pessoa != null) {
             if (ctrManterPessoa.excluirPessoas(pessoa)) {
@@ -226,6 +227,7 @@ public class FrmManterPessoa extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione o Objeto");
+        }
         }
     }//GEN-LAST:event_jBtnExcluirMouseClicked
 
@@ -242,6 +244,7 @@ public class FrmManterPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jLstPessoasMouseClicked
 
     private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
+        if (validaCampos() == 1) {
         pessoa = (Pessoa) jLstPessoas.getSelectedValue();
          if (pessoa != null) {
               jTxtNome.setText(pessoa.getNome());
@@ -259,7 +262,8 @@ public class FrmManterPessoa extends javax.swing.JFrame {
             }
          } else {
              JOptionPane.showMessageDialog(null, "Objeto não localizado");
-         }   
+         }
+        }
     }//GEN-LAST:event_jBtnAlterarMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -277,7 +281,12 @@ public class FrmManterPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     public int validaCampos() {
-        if (jTxtNome.getText() == null ||  jTxtSobrenome.getText() == null || jTxtUsuario.getText() == null || jPasswordSenha.getText() == null) {
+        System.out.println("LOG STATUS | Entrando no metodo de validação de campos...");
+        System.out.println("LOG STATUS | jTxtNome: " + jTxtNome.getText());
+        System.out.println("LOG STATUS | jTxtSobrenome: " + jTxtSobrenome.getText());
+        System.out.println("LOG STATUS | jTxtUsuario: " + jTxtUsuario.getText());
+        System.out.println("LOG STATUS | jPasswordSenha: " + jPasswordSenha.getText());
+        if (jTxtNome.getText().isEmpty() ||  jTxtSobrenome.getText().isEmpty() || jTxtUsuario.getText().isEmpty() || jPasswordSenha.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Favor Preencher Todos Os Campos!");
             return 2;
         } else {

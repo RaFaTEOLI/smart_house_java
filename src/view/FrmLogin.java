@@ -199,6 +199,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCriarMouseClicked
 
     private void jBtnCadastreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCadastreMouseClicked
+        if (validaCampos() == 1) {
         pessoa = new Pessoa();
         pessoa.setNome(jTxtNome.getText());
         pessoa.setSobrenome(jTxtSobrenome.getText());
@@ -215,6 +216,7 @@ public class FrmLogin extends javax.swing.JFrame {
             hideThings();
         } else {
             JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
+        }
         }
     }//GEN-LAST:event_jBtnCadastreMouseClicked
 
@@ -236,6 +238,19 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnLoginMouseClicked
 
+    public int validaCampos() {
+        System.out.println("LOG STATUS | Entrando no metodo de validação de campos...");
+        System.out.println("LOG STATUS | jTxtNome: " + jTxtNome.getText());
+        System.out.println("LOG STATUS | jTxtSobrenome: " + jTxtSobrenome.getText());
+        System.out.println("LOG STATUS | jTxtCUsuario: " + jTxtCUsuario.getText());
+        System.out.println("LOG STATUS | jPasswordCSenha: " + jPasswordCSenha.getText());
+        if (jTxtNome.getText().isEmpty() ||  jTxtSobrenome.getText().isEmpty() || jTxtCUsuario.getText().isEmpty() || jPasswordCSenha.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Favor Preencher Todos Os Campos!");
+            return 2;
+        } else {
+            return 1;
+        }
+    }
     
     public void hideThings() {
         jLabelCadastre.setVisible(false);

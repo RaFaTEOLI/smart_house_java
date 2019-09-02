@@ -235,6 +235,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtCepActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+        if (validaCampos() == 1) {
         pessoa = (Pessoa) jCbxProprietarios.getSelectedItem();
         casa = new Casa();
         // atribui valores
@@ -252,6 +253,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Objeto não persistido");
         }
+        }
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -259,6 +261,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
+        if (validaCampos() == 1) {
         //recupera a casa selecionado
         casa = (Casa) jLstCasas.getSelectedValue();
         //exclui o funcionario
@@ -270,6 +273,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Objeto excluido");
         } else {
             JOptionPane.showMessageDialog(this, "Objeto não excluido");
+        }
         }
     }//GEN-LAST:event_jBtnExcluirMouseClicked
 
@@ -307,30 +311,32 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
-        //recupera o funcionario e o departamento selecionado
-        casa = (Casa) jLstCasas.getSelectedValue();
-        pessoa = (Pessoa) jCbxProprietarios.getSelectedItem();
-        
-        if (casa != null) {
-            //atribui os valores
-            casa.setNome(jTxtNome.getText());
-            casa.setEndereco(jTxtEndereco.getText());
-            casa.setCidade(jTxtCidade.getText());
-            casa.setCep(jTxtCep.getText());
-            casa.setPessoa(pessoa);
-            
-            //altera objeto
-            if (ctrManterCasa.alterarCasa(casa)) {
-                casa.setNome("");
-                casa.setEndereco("");
-                casa.setCidade("");
-                casa.setCep("");
-                JOptionPane.showMessageDialog(this, "Objeto persistido");
+        if (validaCampos() == 1) {
+            //recupera o funcionario e o departamento selecionado
+            casa = (Casa) jLstCasas.getSelectedValue();
+            pessoa = (Pessoa) jCbxProprietarios.getSelectedItem();
+
+            if (casa != null) {
+                //atribui os valores
+                casa.setNome(jTxtNome.getText());
+                casa.setEndereco(jTxtEndereco.getText());
+                casa.setCidade(jTxtCidade.getText());
+                casa.setCep(jTxtCep.getText());
+                casa.setPessoa(pessoa);
+
+                //altera objeto
+                if (ctrManterCasa.alterarCasa(casa)) {
+                    casa.setNome("");
+                    casa.setEndereco("");
+                    casa.setCidade("");
+                    casa.setCep("");
+                    JOptionPane.showMessageDialog(this, "Objeto persistido");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Objeto não persistido");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Objeto não persistido");
+                JOptionPane.showMessageDialog(this, "Objeto não localizado");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Objeto não localizado");
         }
     }//GEN-LAST:event_jBtnAlterarMouseClicked
 
@@ -360,6 +366,20 @@ public class FrmManterCasa extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jLstCasasMouseClicked
 
+    public int validaCampos() {
+        System.out.println("LOG STATUS | Entrando no metodo de validação de campos...");
+        System.out.println("LOG STATUS | jTxtNome: " + jTxtNome.getText());
+        System.out.println("LOG STATUS | jTxtEndereco: " + jTxtEndereco.getText());
+        System.out.println("LOG STATUS | jTxtCidade: " + jTxtCidade.getText());
+        System.out.println("LOG STATUS | jTxtCep: " + jTxtCep.getText());
+        if (jTxtNome.getText().isEmpty() ||  jTxtEndereco.getText().isEmpty() || jTxtCidade.getText().isEmpty() || jTxtCep.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Favor Preencher Todos Os Campos!");
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
