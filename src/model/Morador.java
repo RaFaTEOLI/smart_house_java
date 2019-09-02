@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +15,13 @@ public class Morador implements Serializable {
     @Column(unique=true)
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     
+    
+    
+    
     private Integer moradorId;
     // Herda o Id da Pessoa para o mostrar quem é a pessoa
     // Herda o Id da Casa para o mostrar de qual casa a pessoa mora
-    private String data_cadastro;
+    private Date data_cadastro;
     
     /**
      * @return the moradorId
@@ -36,15 +40,20 @@ public class Morador implements Serializable {
     /**
      * @return the data_cadastro
      */
-    public String getData_cadastro() {
+    public Date getData_cadastro() {
         return data_cadastro;
     }
 
     /**
      * @param data_cadastro the data_cadastro to set
      */
-    public void setData_cadastro(String data_cadastro) {
-        this.data_cadastro = data_cadastro;
+    public void setData_cadastro(Date data_cadastro) {
+        this.setData_cadastro(data_cadastro);
     }
+
+    /**
+     * @return the pessoa
+     */
+  
     
 }

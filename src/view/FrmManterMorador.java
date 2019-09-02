@@ -5,21 +5,43 @@
  */
 package view;
 
+import control.CtrManterCasa;
+import control.CtrManterMorador;
+import control.CtrManterPessoa;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import model.Casa;
+import model.Morador;
+import model.Pessoa;
 
 /**
  *
  * @author ENGENHARIA02
  */
 public class FrmManterMorador extends javax.swing.JFrame {
-
+    
+        CtrManterMorador ctrManterMorador ;
+        CtrManterCasa ctrManterCasa;
+        CtrManterPessoa ctrManterPessoa;
+        Morador morador;
+        Pessoa pessoa;
+        Casa casa;
     /**
      * Creates new form FrmManterMoradores
      */
     public FrmManterMorador() {
+        ctrManterMorador = new CtrManterMorador();
+        ctrManterPessoa = new CtrManterPessoa();
+        ctrManterCasa = new CtrManterCasa();
         initComponents();
     }
 
@@ -46,8 +68,24 @@ public class FrmManterMorador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Moradores");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabelMorador.setText("Morador:");
+
+        jCbxCasas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCbxCasasMouseClicked(evt);
+            }
+        });
+        jCbxCasas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCbxCasasActionPerformed(evt);
+            }
+        });
 
         jLabelCasa.setText("Casa:");
 
@@ -64,14 +102,43 @@ public class FrmManterMorador extends javax.swing.JFrame {
         jTxtDataCadastro.updateUI();
 
         jLstMoradores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jLstMoradores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLstMoradoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jLstMoradores);
 
         jBtnIncluir.setText("Incluir");
+        jBtnIncluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnIncluirMouseClicked(evt);
+            }
+        });
+        jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnIncluirActionPerformed(evt);
+            }
+        });
 
         jBtnExcluir.setText("Excluir");
+        jBtnExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnExcluirMouseClicked(evt);
+            }
+        });
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
 
         jBtnAlterar.setText("Alterar");
-        jBtnAlterar.setActionCommand("Alterar");
+        jBtnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAlterarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,22 +201,152 @@ public class FrmManterMorador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void carregaDataAtual() {
-        Calendar c = Calendar.getInstance();
-        Date data = c.getTime();
-         
-        System.out.println("LOG STATUS | Data Atual Gerada: " + data);
-         
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("LOG STATUS | Data Formatada: " + sdf.format(data));
-        
-        System.out.println("LOG STATUS | Setando Data Formatada no TextField: " + sdf.format(data));
-        jTxtDataCadastro.setText(sdf.format(data));
-    }
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        //carrega combo de Moradores
+           DefaultComboBoxModel modelCombo = new DefaultComboBoxModel();
+            
+                List listPessoa = ctrManterPessoa.carregarPessoas();
+
+                        if (listPessoa != null) {
+                            Iterator j = listPessoa.iterator();
+                            while (j.hasNext()) {
+                                Pessoa pessoaList = (Pessoa) j.next();
+                                modelCombo.addElement(pessoaList);
+                            }
+                            jCbxMoradores.setModel(modelCombo);
+                                }
+                    
+        //carrega combo de casas
+        DefaultComboBoxModel modelCombo1 = new DefaultComboBoxModel();
+            List listCasa = ctrManterCasa.carregarCasas();
+                    if (listCasa != null) {
+                        Iterator j = listCasa.iterator();
+                        while (j.hasNext()) {
+                            Casa casaList = (Casa) j.next();
+                            modelCombo1.addElement(casaList);
+                     }
+                        jCbxCasas.setModel(modelCombo1);
+                  
+
     
-    /**
-     * @param args the command line arguments
-     */
+    }
+        
+    // METODO DE CARREGAR DATA
+        carregaDataAtual();   
+
+        // INICIALIZA LISTA MORADORES
+             DefaultListModel listModel = new DefaultListModel();
+        List listMorador = new ArrayList();
+        listMorador = ctrManterMorador.carregarMorador();
+        if (listPessoa != null) {
+            Iterator i = listMorador.iterator();
+            while (i.hasNext()) {
+                Morador moradorList = (Morador) i.next();
+                listModel.addElement(moradorList);
+            }    
+            jLstMoradores.setModel(listModel);
+        }   
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jCbxCasasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCbxCasasMouseClicked
+      
+    }//GEN-LAST:event_jCbxCasasMouseClicked
+
+    private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+        
+    }//GEN-LAST:event_jBtnIncluirActionPerformed
+
+    private void jBtnIncluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnIncluirMouseClicked
+        morador = new Morador();
+        //inclui objeto
+        pessoa = (Pessoa) jCbxMoradores.getSelectedItem();
+        casa = (Casa) jCbxCasas.getSelectedItem();
+        Calendar c = Calendar.getInstance();
+    //    Date data = c.getTime();
+     //   SimpleDateFormat ins = new SimpleDateFormat("yyyy-MM-dd");
+       // Date date1=formatter1.parse(sDate1);  
+        //data = ins.format(jTxtDataCadastro.getText());
+        //morador.setData_cadastro(data); 
+
+        
+        if (ctrManterMorador.gravarMorador(morador) == 1) {
+            JOptionPane.showMessageDialog(this, "Objeto persistido");
+        } else {
+            JOptionPane.showMessageDialog(this, "Objeto não persistido");
+        }
+    }//GEN-LAST:event_jBtnIncluirMouseClicked
+
+    private void jCbxCasasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbxCasasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCbxCasasActionPerformed
+
+    private void jLstMoradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLstMoradoresMouseClicked
+        morador = (Morador) jLstMoradores.getSelectedValue();
+                 
+       
+    }//GEN-LAST:event_jLstMoradoresMouseClicked
+
+    private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
+        //recupera a casa selecionado
+        morador = (Morador) jLstMoradores.getSelectedValue();
+        //exclui o funcionario
+        if (ctrManterMorador.excluirMorador(morador)) {
+                        
+            JOptionPane.showMessageDialog(this, "Objeto excluido");
+        } else {
+            JOptionPane.showMessageDialog(this, "Objeto não excluido");
+        }
+    }//GEN-LAST:event_jBtnExcluirMouseClicked
+
+    private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
+        casa = (Casa) jCbxCasas.getSelectedItem();
+        pessoa = (Pessoa) jCbxMoradores.getSelectedItem();
+       
+      //  morador = (Morador) jTxtDataCadastro.getInstance(); 
+        
+        if (morador != null) {
+            //atribui os valores
+            
+        if (ctrManterMorador.alterarMorador(morador)) {
+              
+                JOptionPane.showMessageDialog(this, "Objeto persistido");
+            } else {
+                JOptionPane.showMessageDialog(this, "Objeto não persistido");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Objeto não localizado");
+                 }
+        
+    }//GEN-LAST:event_jBtnAlterarMouseClicked
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+        //recupera a casa selecionado
+        morador = (Morador) jLstMoradores.getSelectedValue();
+        //exclui o funcionario
+        if (ctrManterMorador.excluirMorador(morador)) {
+           morador.setData_cadastro("");
+            
+            JOptionPane.showMessageDialog(this, "Objeto excluido");
+        } else {
+            JOptionPane.showMessageDialog(this, "Objeto não excluido");
+        }
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
+        public void carregaDataAtual() {
+
+            Calendar c = Calendar.getInstance();
+
+            Date data = c.getTime();
+
+            System.out.println("LOG STATUS | Data Atual Gerada: " + data);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            
+            System.out.println("LOG STATUS | Data Formatada: " + sdf.format(data));
+
+            System.out.println("LOG STATUS | Setando Data Formatada no TextField: " + sdf.format(data));
+            jTxtDataCadastro.setText(sdf.format(data));
+        }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
