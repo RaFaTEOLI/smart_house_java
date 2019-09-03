@@ -255,9 +255,11 @@ public class FrmManterMorador extends javax.swing.JFrame {
             while (i.hasNext()) {
                 Casa casaList = (Casa) i.next();
                 modelComboCasas.addElement(casaList);
+                System.out.println("LOG STATUS | Combo de Casas: " + casaList);
             }
+            jCbxCasas.setModel(modelComboCasas);
         }
-        jCbxCasas.setModel(modelComboCasas);
+        
         
         
         DefaultComboBoxModel modelComboMoradores = new DefaultComboBoxModel();
@@ -351,18 +353,22 @@ public class FrmManterMorador extends javax.swing.JFrame {
 
     private void jLstMoradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLstMoradoresMouseClicked
        morador = (Morador) jLstMoradores.getSelectedValue();
+       System.out.println("LOG STATUS | Valores selecionados da Lista de Moradores: " + jLstMoradores.getSelectedValue());
        if (morador != null) {
+           System.out.println("LOG STATUS | jCbxMoradores.setSelectedItem(morador.getPessoaId()): " + morador.getPessoaId());
            jCbxMoradores.setSelectedItem(morador.getPessoaId());
+           System.out.println("LOG STATUS | jCbxMoradores.setSelectedItem(morador.getCasaId()): " + morador.getCasaId());
            jCbxCasas.setSelectedItem(morador.getCasaId());
            jTxtDataCadastro.setText(df.format(morador.getDataCadastro()));
+           System.out.println("LOG STATUS | jCbxCasas.getSelectedItem(): " + jCbxCasas.getSelectedItem());
            int count;
            int count2;
            for (count = 0; count < jCbxMoradores.getModel().getSize(); count++) {
                if (((Pessoa)jCbxMoradores.getModel().getElementAt(count)).equals(morador.getPessoaId())) {
-                   jCbxMoradores.setSelectedIndex(count);
-                   break;
+                  jCbxMoradores.setSelectedIndex(count);
+                  break;
                }
-           }
+          }
            for (count2 = 0; count2 < jCbxCasas.getModel().getSize(); count2++) {
                if (((Casa)jCbxCasas.getModel().getElementAt(count2)).equals(morador.getCasaId())) {
                    jCbxCasas.setSelectedIndex(count2);

@@ -116,4 +116,13 @@ public class Casa implements Serializable {
         return this.casaid + " - " + this.getNome();
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+            if (this.getCasaId().equals(((Casa)obj).getCasaId())) {
+                result = true;
+            }
+        return result;
+    }
+    
 }

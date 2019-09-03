@@ -96,6 +96,15 @@ public class Morador implements Serializable {
     public String toString() {
         return this.moradorId + " - " + getPessoaId() + " | Casa: " + getCasaId();
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+            if (this.getMoradorId().equals(((Morador)obj).getMoradorId())) {
+                result = true;
+            }
+        return result;
+    }
   
     
 }
