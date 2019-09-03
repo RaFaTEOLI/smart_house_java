@@ -7,21 +7,56 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 @Entity
 public class Morador implements Serializable {
-    
     @Id
     @Column(unique=true)
     @GeneratedValue (strategy=GenerationType.IDENTITY)
-    
-    
-    
-    
     private Integer moradorId;
-    // Herda o Id da Pessoa para o mostrar quem é a pessoa
-    // Herda o Id da Casa para o mostrar de qual casa a pessoa mora
+    
+    @ManyToOne
+    @JoinColumn(name="pessoaId")
+    private Pessoa pessoaId;
+    
+    @ManyToOne
+    @JoinColumn(name="casaId")
+    private Casa casaId;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date data_cadastro;
+    
+    /**
+     * @return the casaId
+     */
+    public Casa getCasaId() {
+        return casaId;
+    }
+
+    /**
+     * @param casaId the casaId to set
+     */
+    public void setCasaId(Casa casaId) {
+        this.casaId = casaId;
+    }
+    
+    /**
+     * @return the pessoaId
+     */
+    public Pessoa getPessoaId() {
+        return pessoaId;
+    }
+
+    /**
+     * @param pessoaId the pessoaId to set
+     */
+    public void setPessoaId(Pessoa pessoaId) {
+        this.pessoaId = pessoaId;
+    }
     
     /**
      * @return the moradorId
@@ -40,20 +75,21 @@ public class Morador implements Serializable {
     /**
      * @return the data_cadastro
      */
-    public Date getData_cadastro() {
+    public Date getDataCadastro() {
         return data_cadastro;
     }
-
+    
     /**
-     * @param data_cadastro the data_cadastro to set
+     * @param dataCadastro the dataCadastro to set
      */
-    public void setData_cadastro(Date data_cadastro) {
-        this.setData_cadastro(data_cadastro);
+    public void setDataCadastro(Date data_cadastro) {
+        this.data_cadastro = data_cadastro;
     }
 
-    /**
-     * @return the pessoa
-     */
+    @Override
+    public String toString() {
+        return this.moradorId + " - " + getPessoaId() + " | Casa: " + getCasaId();
+    }
   
     
 }

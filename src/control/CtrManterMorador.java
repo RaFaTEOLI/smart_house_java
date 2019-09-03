@@ -24,8 +24,7 @@ public class CtrManterMorador {
     
     public List carregarMorador() {
         try {
-            return acessoHibernateMorador.carregarTudoOrdenado(Morador.class,
-"nome");
+            return acessoHibernateMorador.carregarTudoOrdenado(Morador.class, "moradorId");
         } catch (HibernateException e) {
                 return null;
         }

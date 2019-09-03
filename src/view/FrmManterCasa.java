@@ -19,10 +19,6 @@ import javax.swing.JOptionPane;
 import model.Casa;
 import model.Pessoa;
 
-/**
- *
- * @author ENGENHARIA02
- */
 public class FrmManterCasa extends javax.swing.JFrame {
 
     CtrManterCasa ctrManterCasa;
