@@ -15,12 +15,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Table;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import model.Casa;
 import model.Morador;
@@ -154,7 +157,7 @@ public class FrmManterMorador extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
                         .addComponent(jBtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,7 +178,7 @@ public class FrmManterMorador extends javax.swing.JFrame {
                                     .addComponent(jTxtDataCadastro))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -195,12 +198,12 @@ public class FrmManterMorador extends javax.swing.JFrame {
                     .addComponent(jTxtDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -208,7 +211,6 @@ public class FrmManterMorador extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         //inicia os atributos
-        
         ctrManterPessoa = new CtrManterPessoa();
         ctrManterCasa = new CtrManterCasa();
         ctrManterMorador = new CtrManterMorador();
@@ -258,7 +260,7 @@ public class FrmManterMorador extends javax.swing.JFrame {
                 System.out.println("LOG STATUS | Lista de Moradores: " + moradorList);
             }
         }
-        System.out.println("LOG STATUS | Lista de Moradores: " + listModelMorador);
+        System.out.println("LOG STATUS | Lista Model de Moradores: " + listModelMorador);
         jLstMoradores.setModel(listModelMorador);
         
         //inicializa o formato das datas
@@ -313,9 +315,16 @@ public class FrmManterMorador extends javax.swing.JFrame {
            jCbxCasas.setSelectedItem(morador.getCasaId());
            jTxtDataCadastro.setText(df.format(morador.getDataCadastro()));
            int count;
+           int count2;
            for (count = 0; count < jCbxMoradores.getModel().getSize(); count++) {
-               if (((Morador)jCbxMoradores.getModel().getElementAt(count)).equals(morador.getMoradorId())) {
+               if (((Pessoa)jCbxMoradores.getModel().getElementAt(count)).equals(morador.getPessoaId())) {
                    jCbxMoradores.setSelectedIndex(count);
+                   break;
+               }
+           }
+           for (count2 = 0; count2 < jCbxCasas.getModel().getSize(); count2++) {
+               if (((Casa)jCbxCasas.getModel().getElementAt(count2)).equals(morador.getCasaId())) {
+                   jCbxCasas.setSelectedIndex(count2);
                    break;
                }
            }
@@ -338,24 +347,29 @@ public class FrmManterMorador extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnExcluirMouseClicked
 
     private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
-        casa = (Casa) jCbxCasas.getSelectedItem();
         pessoa = (Pessoa) jCbxMoradores.getSelectedItem();
-       
-      //  morador = (Morador) jTxtDataCadastro.getInstance(); 
+        casa = (Casa) jCbxCasas.getSelectedItem();
         
+        try {
+            System.out.println("LOG STATUS | Reformatando a data para inserir no banco de dados: " + df.parse(jTxtDataCadastro.getText()));
+            morador.setDataCadastro(df.parse(jTxtDataCadastro.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmManterMorador.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Data Incorreta!");
+            return;
+        }
+        System.out.println("LOG STATUS | Objeto Morador: " + morador);
         if (morador != null) {
-            //atribui os valores
-            
-        if (ctrManterMorador.alterarMorador(morador)) {
-              
+            morador.setPessoaId(pessoa);
+            System.out.println("LOG STATUS | Setando Pessoa: " + morador.getPessoaId());
+            morador.setCasaId(casa);
+            System.out.println("LOG STATUS | Setando Casa: " + morador.getCasaId());
+            if (ctrManterMorador.alterarMorador(morador)) {
                 JOptionPane.showMessageDialog(this, "Morador alterado!");
             } else {
                 JOptionPane.showMessageDialog(this, "Morador não persistido!");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Morador não localizado!");
-                 }
-        
+        }
     }//GEN-LAST:event_jBtnAlterarMouseClicked
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed

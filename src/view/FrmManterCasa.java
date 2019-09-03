@@ -309,7 +309,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
 
     private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
         if (validaCampos() == 1) {
-            //recupera o funcionario e o departamento selecionado
+            
             casa = (Casa) jLstCasas.getSelectedValue();
             pessoa = (Pessoa) jCbxProprietarios.getSelectedItem();
 
@@ -342,16 +342,13 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jLstCasasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLstCasasMouseClicked
-       //recupera o funcionario selecionado
        casa = (Casa) jLstCasas.getSelectedValue();
-       //apresenta os dados do funcionario
        if (casa != null) {
             jTxtNome.setText(casa.getNome());
             jTxtEndereco.setText(casa.getEndereco());
             jTxtCidade.setText(casa.getCidade());
             jTxtCep.setText(casa.getCep());
             int count;
-            //apresenta o departamento do funcionario
             for (count = 0; count < jCbxProprietarios.getModel().getSize(); count++) {
                if (((Pessoa)jCbxProprietarios.getModel().getElementAt(count)).equals(casa.getPessoa())) {
                    jCbxProprietarios.setSelectedIndex(count);

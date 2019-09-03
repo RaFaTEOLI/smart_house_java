@@ -1,2 +1,6 @@
 /nbproject/private/
 /build/
+build/classes/hibernate.properties
+src/hibernate.properties
+src/view/FrmLogin.java
+build/classes/hibernate.properties

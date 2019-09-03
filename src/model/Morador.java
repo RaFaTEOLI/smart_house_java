@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -86,6 +87,11 @@ public class Morador implements Serializable {
         this.data_cadastro = data_cadastro;
     }
 
+    
+    public String toStringOld() {
+        return Arrays.toString(new Object[] {getPessoaId(), getCasaId()});
+    }
+    
     @Override
     public String toString() {
         return this.moradorId + " - " + getPessoaId() + " | Casa: " + getCasaId();
