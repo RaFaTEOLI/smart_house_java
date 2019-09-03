@@ -73,6 +73,9 @@ public class FrmManterMorador extends javax.swing.JFrame {
         jBtnIncluir = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
         jBtnAlterar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableMoradores = new javax.swing.JTable();
+        jlSelecione = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Moradores");
@@ -148,6 +151,21 @@ public class FrmManterMorador extends javax.swing.JFrame {
             }
         });
 
+        jTableMoradores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTableMoradores);
+
+        jlSelecione.setText("Selecione o morador:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,11 +173,11 @@ public class FrmManterMorador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBtnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addGap(57, 57, 57)
                         .addComponent(jBtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
@@ -168,17 +186,18 @@ public class FrmManterMorador extends javax.swing.JFrame {
                             .addComponent(jLabelCasa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelMorador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCbxMoradores, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jCbxCasas, 0, 197, Short.MAX_VALUE)
-                                    .addComponent(jTxtDataCadastro))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jCbxCasas, javax.swing.GroupLayout.Alignment.LEADING, 0, 207, Short.MAX_VALUE)
+                            .addComponent(jTxtDataCadastro, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCbxMoradores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(27, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlSelecione)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -197,13 +216,17 @@ public class FrmManterMorador extends javax.swing.JFrame {
                     .addComponent(jLabelDataCadastro)
                     .addComponent(jTxtDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(jlSelecione)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -211,6 +234,10 @@ public class FrmManterMorador extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         //inicia os atributos
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Morador");
+        modelo.addColumn("Casa");
+        
         ctrManterPessoa = new CtrManterPessoa();
         ctrManterCasa = new CtrManterCasa();
         ctrManterMorador = new CtrManterMorador();
@@ -262,6 +289,20 @@ public class FrmManterMorador extends javax.swing.JFrame {
         }
         System.out.println("LOG STATUS | Lista Model de Moradores: " + listModelMorador);
         jLstMoradores.setModel(listModelMorador);
+        
+        if (listMorador != null) {
+            Iterator i = listMorador.iterator();
+            while (i.hasNext()) {
+                Morador moradorList = (Morador) i.next();
+                System.out.println("LOG STATUS | MoradorList.getPessoaId: " + moradorList.getPessoaId());
+                System.out.println("LOG STATUS | MoradorList.getCasaId: " + moradorList.getCasaId());
+                String pessoaStr = String.valueOf(moradorList.getPessoaId());
+                String casaStr = String.valueOf(moradorList.getCasaId());
+                String[] row = {pessoaStr, casaStr};
+                modelo.addRow(row);
+            }
+        }
+        jTableMoradores.setModel(modelo);
         
         //inicializa o formato das datas
         df = new SimpleDateFormat("dd/MM/yyyy");
@@ -435,6 +476,9 @@ public class FrmManterMorador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelMorador;
     private javax.swing.JList jLstMoradores;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableMoradores;
     private javax.swing.JFormattedTextField jTxtDataCadastro;
+    private javax.swing.JLabel jlSelecione;
     // End of variables declaration//GEN-END:variables
 }
