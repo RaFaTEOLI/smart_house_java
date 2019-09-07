@@ -11,10 +11,6 @@ import view.FrmManterPessoa;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author lab
- */
 public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal

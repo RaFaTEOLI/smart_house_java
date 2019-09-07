@@ -13,10 +13,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import model.Pessoa;
 
-/**
- *
- * @author lab
- */
 public class FrmManterPessoa extends javax.swing.JFrame {
 
     CtrManterPessoa ctrManterPessoa;

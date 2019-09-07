@@ -15,10 +15,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author ENGENHARIA02
- */
+
 public class FrmLogin extends javax.swing.JFrame {
     CtrManterPessoa ctrManterPessoa;
     Pessoa pessoa;

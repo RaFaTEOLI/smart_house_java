@@ -5,10 +5,7 @@
  */
 package view;
 
-/**
- *
- * @author ENGENHARIA02
- */
+
 public class FrmManterAparelho extends javax.swing.JFrame {
 
     /**

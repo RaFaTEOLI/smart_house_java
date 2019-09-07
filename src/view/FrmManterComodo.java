@@ -5,10 +5,6 @@
  */
 package view;
 
-/**
- *
- * @author ENGENHARIA02
- */
 public class FrmManterComodo extends javax.swing.JFrame {
 
     /**
