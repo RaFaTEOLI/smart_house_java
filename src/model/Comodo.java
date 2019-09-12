@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Comodo implements Serializable {
@@ -13,24 +15,42 @@ public class Comodo implements Serializable {
     @Id
     @Column(unique=true)
     @GeneratedValue (strategy=GenerationType.IDENTITY)
+    private Integer comodoId;
     
-    private Integer quartoId;
-    // Herda o Id da Casa para o mostrar de onde o quarto é
+    @ManyToOne
+    @JoinColumn(name="casaId")
+    private Casa casaId;
+    
     private String nome;
     private Integer andar;
+    
+    
+    /**
+     * @return the casaId
+     */
+    public Casa getCasaId() {
+        return casaId;
+    }
+
+    /**
+     * @param casaId the casaId to set
+     */
+    public void setCasaId(Casa casaId) {
+        this.casaId = casaId;
+    }
     
     /**
      * @return the quartoId
      */
-    public Integer getQuartoId() {
-        return quartoId;
+    public Integer getComodoId() {
+        return comodoId;
     }
 
     /**
      * @param quartoId the quartoId to set
      */
-    public void setQuartoId(Integer quartoId) {
-        this.quartoId = quartoId;
+    public void setComodoId(Integer quartoId) {
+        this.comodoId = quartoId;
     }
 
     /**
@@ -60,4 +80,19 @@ public class Comodo implements Serializable {
     public void setAndar(Integer andar) {
         this.andar = andar;
     }
+
+    
+        @Override
+    public String toString() {
+        return this.comodoId + " - " + this.getNome();
+    }
+    
+    public boolean equals(Object obj) {
+        boolean result = false;
+            if (this.getComodoId().equals(((Comodo)obj).getComodoId())) {
+                result = true;
+            }
+        return result;
+    }
+
 }
