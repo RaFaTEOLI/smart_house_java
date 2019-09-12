@@ -325,6 +325,18 @@ public class FrmManterComodo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
+    public int validaCampos() {
+        System.out.println("LOG STATUS | Entrando no metodo de validação de campos...");
+        System.out.println("LOG STATUS | jTxtComodo: " + jTxtQuarto.getText());
+        System.out.println("LOG STATUS | jTxtAndar: " + jTxtAndar.getText());
+        if (jTxtQuarto.getText().isEmpty() ||  jTxtAndar.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Favor Preencher Todos Os Campos!");
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
