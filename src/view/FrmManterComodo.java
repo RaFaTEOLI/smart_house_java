@@ -17,12 +17,6 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
 
-
-/**
- * 
- *
- * @author ENGENHARIA02
- */
 public class FrmManterComodo extends javax.swing.JFrame {
 
     /**
@@ -220,10 +214,10 @@ public class FrmManterComodo extends javax.swing.JFrame {
         if(ctrManterComodo.excluirQuarto(comodo)){
             comodo.setNome("");
             comodo.setAndar(0);
-            JOptionPane.showMessageDialog(this, "Objeto excluido");    
+            JOptionPane.showMessageDialog(this, "Cômodo excluido");    
         }
          else {
-            JOptionPane.showMessageDialog(this, "Objeto não excluido");
+            JOptionPane.showMessageDialog(this, "Cômodo não excluido");
         }
     }//GEN-LAST:event_jBtnExcluirMouseClicked
 
@@ -239,10 +233,10 @@ public class FrmManterComodo extends javax.swing.JFrame {
        if(ctrManterComodo.gravarQuarto(comodo) == 1){
              comodo.setNome("");
              comodo.setAndar(0);
-            JOptionPane.showMessageDialog(null, "Objeto persistido");         
+            JOptionPane.showMessageDialog(null, "Cômodo cadastrado");         
  }
           else{
-     JOptionPane.showMessageDialog(null, "Objeto não persistido");
+     JOptionPane.showMessageDialog(null, "Cômodo não cadastrado");
     
     }
 
@@ -292,7 +286,7 @@ public class FrmManterComodo extends javax.swing.JFrame {
                    
                }
         } else {
-           JOptionPane.showMessageDialog(null, "Objeto não Encontrado!");
+           JOptionPane.showMessageDialog(null, "Cômodo não encontrado!");
         } 
                    
     }//GEN-LAST:event_jLstComodoMouseClicked

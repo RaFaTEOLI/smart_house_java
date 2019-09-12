@@ -2,6 +2,7 @@
 import dao.HibernateConfiguracao;
 import view.FrmLogin;
 import view.FrmManterCasa;
+import view.FrmManterComodo;
 import view.FrmManterMorador;
 import view.FrmManterPessoa;
 
@@ -34,6 +35,7 @@ public class Principal extends javax.swing.JFrame {
         jBtnExibirCasa = new javax.swing.JButton();
         jBtnExibirLogin = new javax.swing.JButton();
         jBtnExibirMorador = new javax.swing.JButton();
+        jBtnExibirComodo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Smart House");
@@ -75,6 +77,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnExibirComodo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jBtnExibirComodo.setText("Cômodos");
+        jBtnExibirComodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExibirComodoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,7 +95,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 235, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnExibirComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 94, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(257, 257, 257)
                 .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -97,7 +109,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnExibirPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExibirComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -130,6 +143,12 @@ public class Principal extends javax.swing.JFrame {
         telaMorador.setVisible(true);
         telaMorador.setLocationRelativeTo(this);
     }//GEN-LAST:event_jBtnExibirMoradorActionPerformed
+
+    private void jBtnExibirComodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExibirComodoActionPerformed
+        FrmManterComodo telaComodo = new FrmManterComodo();
+        telaComodo.setVisible(true);
+        telaComodo.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jBtnExibirComodoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +210,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnExibirCasa;
+    private javax.swing.JButton jBtnExibirComodo;
     private javax.swing.JButton jBtnExibirLogin;
     private javax.swing.JButton jBtnExibirMorador;
     private javax.swing.JButton jBtnExibirPessoa;
