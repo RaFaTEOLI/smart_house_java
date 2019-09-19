@@ -58,7 +58,7 @@ public class FrmManterComodo extends javax.swing.JFrame {
         jTxtAndar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quartos");
+        setTitle("Cômodos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -110,7 +110,7 @@ public class FrmManterComodo extends javax.swing.JFrame {
             }
         });
 
-        jLabelQuarto.setText("Quarto :");
+        jLabelQuarto.setText("Comodo:");
 
         jLabelAndar.setText("Andar :");
 
@@ -211,7 +211,7 @@ public class FrmManterComodo extends javax.swing.JFrame {
     private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
         comodo = (Comodo) jLstComodo.getSelectedValue();
         
-        if(ctrManterComodo.excluirQuarto(comodo)){
+        if(ctrManterComodo.excluirComodo(comodo)){
             comodo.setNome("");
             comodo.setAndar(0);
             JOptionPane.showMessageDialog(this, "Cômodo excluido");    
@@ -230,7 +230,7 @@ public class FrmManterComodo extends javax.swing.JFrame {
        comodo.setAndar(andar);
        comodo.setCasaId(casa);
        
-       if(ctrManterComodo.gravarQuarto(comodo) == 1){
+       if(ctrManterComodo.gravarComodo(comodo) == 1){
              comodo.setNome("");
              comodo.setAndar(0);
             JOptionPane.showMessageDialog(null, "Cômodo cadastrado");         
@@ -254,7 +254,7 @@ public class FrmManterComodo extends javax.swing.JFrame {
         comodo.setAndar(andar);
         comodo.setCasaId(casa);
         
-        if(ctrManterComodo.alterarQuarto(comodo)){
+        if(ctrManterComodo.alterarComodo(comodo)){
             System.out.println("LOG STATUS - ComodoId: " + comodo.getComodoId());
             comodo.setNome("");
             comodo.setAndar(0);
@@ -299,7 +299,7 @@ public class FrmManterComodo extends javax.swing.JFrame {
         casa = new Casa();
         DefaultListModel listModel = new DefaultListModel();
         List listQuarto = new ArrayList();
-        listQuarto = ctrManterComodo.carregarQuartos();
+        listQuarto = ctrManterComodo.carregarComodos();
         
         if(listQuarto !=null){
             Iterator i = listQuarto.iterator();

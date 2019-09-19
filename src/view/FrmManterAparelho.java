@@ -5,13 +5,34 @@
  */
 package view;
 
+import control.CtrManterAparelho;
+import control.CtrManterCasa;
+import control.CtrManterComodo;
+import control.CtrManterPessoa;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import model.Aparelho;
+import model.Casa;
+import model.Comodo;
+import model.Pessoa;
 
+/**
+ *
+ * @author ENGENHARIA02
+ */
 public class FrmManterAparelho extends javax.swing.JFrame {
-
-    /**
-     * Creates new form FrmManterAparelho
-     */
+        CtrManterComodo ctrManterComodo;
+        Comodo comodo;
+        CtrManterAparelho ctrManterAparelho;
+        Aparelho aparelho;
+        
     public FrmManterAparelho() {
+        ctrManterAparelho = new CtrManterAparelho();
+        ctrManterComodo = new CtrManterComodo();
         initComponents();
     }
 
@@ -24,22 +45,253 @@ public class FrmManterAparelho extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCbxComodos = new javax.swing.JComboBox();
+        jBtnIncluir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jBtnAlterar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jBtnExcluir = new javax.swing.JButton();
+        jTxtNome = new javax.swing.JTextField();
+        jTxtDescricao = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jLstAparelho = new javax.swing.JList();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Aparelhos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+
+        jCbxComodos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCbxComodosMouseClicked(evt);
+            }
+        });
+
+        jBtnIncluir.setText("Incluir");
+        jBtnIncluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnIncluirMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setText("Comodo:");
+
+        jBtnAlterar.setText("Alterar");
+        jBtnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAlterarMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("Nome:");
+
+        jBtnExcluir.setText("Excluir");
+        jBtnExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnExcluirMouseClicked(evt);
+            }
+        });
+
+        jTxtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtDescricaoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Descrição:");
+
+        jLstAparelho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLstAparelhoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jLstAparelho);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(49, 49, 49)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTxtDescricao)
+                                .addComponent(jCbxComodos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(76, 76, 76)
+                            .addComponent(jBtnIncluir)
+                            .addGap(18, 18, 18)
+                            .addComponent(jBtnAlterar)
+                            .addGap(18, 18, 18)
+                            .addComponent(jBtnExcluir))))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCbxComodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnIncluir)
+                    .addComponent(jBtnAlterar)
+                    .addComponent(jBtnExcluir))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTxtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtDescricaoActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        
+        // carrega lista de Aparelhos
+        ctrManterAparelho = new CtrManterAparelho();
+        ctrManterComodo = new CtrManterComodo();
+        comodo = new Comodo();
+        aparelho = new Aparelho();
+        
+        DefaultListModel listModel = new DefaultListModel();
+        List listAparelho = new ArrayList();
+        listAparelho = ctrManterAparelho.carregarAparelho();
+        
+        if (listAparelho != null) {
+            Iterator i = listAparelho.iterator();
+            while (i.hasNext()) {
+                Aparelho aparelhoList = (Aparelho) i.next();
+                listModel.addElement(aparelhoList);
+            }
+        }
+        jLstAparelho.setModel(listModel);
+        
+       //carrega combo de Comodos
+       DefaultComboBoxModel modelCombo = new DefaultComboBoxModel();
+       List listComodo = ctrManterComodo.carregarComodos();
+        
+        if (listComodo != null) {
+            Iterator j = listComodo.iterator();
+            while (j.hasNext()) {
+                Comodo comodoList = (Comodo) j.next();
+                modelCombo.addElement(comodoList);
+                System.out.println("LOG STATUS - ComboBox: " + comodoList);
+            }
+            jCbxComodos.setModel(modelCombo);
+        }
+        
+
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jCbxComodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCbxComodosMouseClicked
+        
+    }//GEN-LAST:event_jCbxComodosMouseClicked
+
+    private void jBtnIncluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnIncluirMouseClicked
+           
+        comodo = (Comodo) jCbxComodos.getSelectedItem();
+        aparelho = new Aparelho();
+        // atribui valores
+        aparelho.setNome(jTxtNome.getText());        
+        aparelho.setDescricao(jTxtNome.getText());
+        aparelho.setComodoId(comodo);
+        
+        System.out.println("LOG STATUS | Cadastrando Casa...");
+        if (ctrManterAparelho.gravarAparelho(aparelho) == 1) {
+            aparelho.setNome("");
+            aparelho.setDescricao("");
+            
+            JOptionPane.showMessageDialog(null, "Aparelho cadastrado!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Aparelho não cadastrado");
+        }
+        
+    }//GEN-LAST:event_jBtnIncluirMouseClicked
+
+    private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
+       comodo = (Comodo) jCbxComodos.getSelectedItem();
+          
+            if (aparelho != null) {
+                //atribui os valores
+                aparelho.setNome(jTxtNome.getText());
+                aparelho.setDescricao(jTxtDescricao.getText());
+                
+
+                //altera objeto
+                if (ctrManterAparelho.alterarAparelho(aparelho)) {
+                    aparelho.setNome("");
+                    aparelho.setDescricao("");
+                    
+                    JOptionPane.showMessageDialog(this, "Aparelho alterada!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Aparelho não alterada!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Aparelho não localizada!");
+            }
+    }//GEN-LAST:event_jBtnAlterarMouseClicked
+
+    private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
+       
+        //recupera a casa selecionado
+        comodo = (Comodo) jCbxComodos.getSelectedItem();
+        //exclui o funcionario
+        if (ctrManterAparelho.excluirAparelho(aparelho)) {
+            aparelho.setNome("");
+            aparelho.setDescricao("");
+            
+            
+            JOptionPane.showMessageDialog(this, "Aparelho excluido");
+        } else {
+            JOptionPane.showMessageDialog(this, "Aparelho não excluido");
+        }
+        
+    }//GEN-LAST:event_jBtnExcluirMouseClicked
+
+    private void jLstAparelhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLstAparelhoMouseClicked
+       aparelho = (Aparelho) jLstAparelho.getSelectedValue();
+       if (aparelho != null) {
+            jTxtNome.setText(aparelho.getNome());
+            jTxtDescricao.setText(aparelho.getDescricao());
+            System.out.println("LOG STATUS - Aparelho != null: " + aparelho);
+            int count;
+            for (count = 0; count < jCbxComodos.getModel().getSize(); count++) {
+               if (((Comodo)jCbxComodos.getModel().getElementAt(count)).equals(aparelho.getComodoId())) {
+                   System.out.println("LOG STATUS - Index: " + count);
+                   jCbxComodos.setSelectedIndex(count);
+                   break;
+               }
+           }
+       } else {
+           JOptionPane.showMessageDialog(null, "Objeto não Encontrado!");
+       }
+    }//GEN-LAST:event_jLstAparelhoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -77,5 +329,16 @@ public class FrmManterAparelho extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnAlterar;
+    private javax.swing.JButton jBtnExcluir;
+    private javax.swing.JButton jBtnIncluir;
+    private javax.swing.JComboBox jCbxComodos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JList jLstAparelho;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTxtDescricao;
+    private javax.swing.JTextField jTxtNome;
     // End of variables declaration//GEN-END:variables
 }

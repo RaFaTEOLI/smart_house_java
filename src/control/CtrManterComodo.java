@@ -12,7 +12,7 @@ public class CtrManterComodo {
         acessoHibernateQuarto = new DaoComodo();
     }
     
-    public int gravarQuarto(Comodo quarto) {
+    public int gravarComodo(Comodo quarto) {
         try {
             acessoHibernateQuarto.gravar(quarto);
             return 1;
@@ -22,7 +22,7 @@ public class CtrManterComodo {
         }
     }
     
-    public List carregarQuartos() {
+    public List carregarComodos() {
         try {
             return acessoHibernateQuarto.carregarTudoOrdenado(Comodo.class,
 "nome");
@@ -31,7 +31,7 @@ public class CtrManterComodo {
         }
     }
     
-    public boolean excluirQuarto(Comodo quarto) {
+    public boolean excluirComodo(Comodo quarto) {
         try {
             acessoHibernateQuarto.excluir(quarto);
             return true;
@@ -41,7 +41,7 @@ public class CtrManterComodo {
         }
     }
     
-    public boolean alterarQuarto(Comodo quarto) {
+    public boolean alterarComodo(Comodo quarto) {
         try {
             acessoHibernateQuarto.alterar(quarto);
             return true;

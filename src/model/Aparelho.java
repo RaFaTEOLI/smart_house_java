@@ -1,24 +1,29 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Aparelho implements Serializable {
-    
+   
     @Id
     @Column(unique=true)
     @GeneratedValue (strategy=GenerationType.IDENTITY)
-    
     private Integer aparelhoId;
-    // Herda o Id da Quarto para o mostrar de onde o aparelho é
+    
+    @ManyToOne
+    @JoinColumn(name="comodoId")
+    private Comodo comodoId;
+    
     private String nome;
     private String descricao;
-    
     
     /**
      * @return the aparelhoId
@@ -61,5 +66,32 @@ public class Aparelho implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    /**
+     * @return the comodoId
+     */
+    public Comodo getComodoId() {
+        return comodoId;
+    }
+
+    /**
+     * @param comodoId the comodoId to set
+    */
+    public void setComodoId(Comodo comodoId) {
+        this.comodoId = comodoId;
+    }
     
+    @Override
+    public String toString() {
+        return this.getAparelhoId() + " - " + this.getNome();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        if (this.getAparelhoId().equals(((Aparelho)obj).getAparelhoId())) {
+            result = true;
+        }
+        return result;
+    }
 }

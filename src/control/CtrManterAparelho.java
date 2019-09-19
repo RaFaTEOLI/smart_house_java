@@ -24,8 +24,7 @@ public class CtrManterAparelho {
     
     public List carregarAparelho() {
         try {
-            return acessoHibernateAparelho.carregarTudoOrdenado(Aparelho.class,
-"nome");
+            return acessoHibernateAparelho.carregarTudoOrdenado(Aparelho.class,"aparelhoId");
         } catch (HibernateException e) {
                 return null;
         }

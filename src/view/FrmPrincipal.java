@@ -1,6 +1,12 @@
+package view;
+
 
 import dao.HibernateConfiguracao;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.util.Timer;
+import java.util.TimerTask;
 import view.FrmLogin;
+import view.FrmManterAparelho;
 import view.FrmManterCasa;
 import view.FrmManterComodo;
 import view.FrmManterMorador;
@@ -12,11 +18,11 @@ import view.FrmManterPessoa;
  * and open the template in the editor.
  */
 
-public class Principal extends javax.swing.JFrame {
+public class FrmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public FrmPrincipal() {
         HibernateConfiguracao configuracao = new HibernateConfiguracao();
         configuracao.criaSessionFactory();
         initComponents();
@@ -36,6 +42,7 @@ public class Principal extends javax.swing.JFrame {
         jBtnExibirLogin = new javax.swing.JButton();
         jBtnExibirMorador = new javax.swing.JButton();
         jBtnExibirComodo = new javax.swing.JButton();
+        jBtnExibirAparelho = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Smart House");
@@ -85,6 +92,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBtnExibirAparelho.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jBtnExibirAparelho.setText("Aparelhos");
+        jBtnExibirAparelho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExibirAparelhoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,7 +112,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnExibirComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 94, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnExibirAparelho, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 95, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(257, 257, 257)
                 .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,7 +127,8 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jBtnExibirPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExibirCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExibirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnExibirComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBtnExibirComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnExibirAparelho, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(jBtnExibirLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -150,32 +168,16 @@ public class Principal extends javax.swing.JFrame {
         telaComodo.setLocationRelativeTo(this);
     }//GEN-LAST:event_jBtnExibirComodoActionPerformed
 
+    private void jBtnExibirAparelhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExibirAparelhoActionPerformed
+        FrmManterAparelho telaAparelho = new FrmManterAparelho();
+        telaAparelho.setVisible(true);
+        telaAparelho.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jBtnExibirAparelhoActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        FrmLogin telaLogin = new FrmLogin();
-        
-        telaLogin.hideThings();
-        
-        while (telaLogin.getLogado() == false) {
-
-            telaLogin.setVisible(true);
-            if (telaLogin.getLogado() == true) {
-                telaLogin.setVisible(false);
-                System.out.println("LOG STATUS | Entrando no metodo para criar tela principal...");
-                Principal telaPrincipal = new Principal();
-                telaPrincipal.setVisible(true);
-                telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
-            }
-            
-        }
-        
-        System.out.println("LOG STATUS | Usuário Logado? " + telaLogin.getLogado());
-            
-        
-        //telaLogin.hideThings();
-        //telaLogin.setVisible(true);
 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -190,14 +192,21 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        /* Create and display the form */
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Principal().setVisible(true);
+            }
         //</editor-fold>
 
         /* Create and display the form */
@@ -209,6 +218,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnExibirAparelho;
     private javax.swing.JButton jBtnExibirCasa;
     private javax.swing.JButton jBtnExibirComodo;
     private javax.swing.JButton jBtnExibirLogin;

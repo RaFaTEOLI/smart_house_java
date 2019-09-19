@@ -84,7 +84,7 @@ public class Comodo implements Serializable {
     
         @Override
     public String toString() {
-        return this.comodoId + " - " + this.getNome();
+        return this.getComodoId() + " - " + this.getNome();
     }
     
     public boolean equals(Object obj) {
