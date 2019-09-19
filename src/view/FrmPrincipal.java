@@ -1,5 +1,10 @@
+package view;
+
 
 import dao.HibernateConfiguracao;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.util.Timer;
+import java.util.TimerTask;
 import view.FrmLogin;
 import view.FrmManterCasa;
 import view.FrmManterComodo;
@@ -12,11 +17,11 @@ import view.FrmManterPessoa;
  * and open the template in the editor.
  */
 
-public class Principal extends javax.swing.JFrame {
+public class FrmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public FrmPrincipal() {
         HibernateConfiguracao configuracao = new HibernateConfiguracao();
         configuracao.criaSessionFactory();
         initComponents();
@@ -154,28 +159,6 @@ public class Principal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        FrmLogin telaLogin = new FrmLogin();
-        
-        telaLogin.hideThings();
-        
-        while (telaLogin.getLogado() == false) {
-
-            telaLogin.setVisible(true);
-            if (telaLogin.getLogado() == true) {
-                telaLogin.setVisible(false);
-                System.out.println("LOG STATUS | Entrando no metodo para criar tela principal...");
-                Principal telaPrincipal = new Principal();
-                telaPrincipal.setVisible(true);
-                telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
-            }
-            
-        }
-        
-        System.out.println("LOG STATUS | Usuário Logado? " + telaLogin.getLogado());
-            
-        
-        //telaLogin.hideThings();
-        //telaLogin.setVisible(true);
 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -190,14 +173,21 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        /* Create and display the form */
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Principal().setVisible(true);
+            }
         //</editor-fold>
 
         /* Create and display the form */

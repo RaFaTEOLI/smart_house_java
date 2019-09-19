@@ -5,3 +5,4 @@ src/hibernate.properties
 src/view/FrmLogin.java
 build/classes/hibernate.properties
 build/classes/hibernate.properties
+build/classes/hibernate.properties

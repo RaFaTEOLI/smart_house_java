@@ -8,7 +8,9 @@ package view;
 import control.CtrManterPessoa;
 import dao.DaoGenerico;
 import dao.DaoLogin;
+import java.security.Principal;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Pessoa;
 import org.hibernate.SQLQuery;
@@ -20,6 +22,8 @@ public class FrmLogin extends javax.swing.JFrame {
     CtrManterPessoa ctrManterPessoa;
     Pessoa pessoa;
     boolean Logado;
+    protected String usuario;
+    protected String senha;
 
     public boolean getLogado() {
         return Logado;
@@ -220,19 +224,26 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void jBtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLoginMouseClicked
         DaoLogin d = new DaoLogin();
+        
+        usuario = jTxtUsuario.getText();
+        senha = jPasswordSenha.getText();
        
         System.out.println("LOG STATUS | Enviando valores do TextField para o Método de Validação...");
         System.out.println("LOG STATUS | Usuário: " + jTxtUsuario.getText() + " Senha: " + jPasswordSenha.getText());
+        
         if (d.validaLogin(jTxtUsuario.getText(), jPasswordSenha.getText()) == 1) {
             //Usuario Logado
             System.out.println("LOG STATUS | Usuário Logado!");
             JOptionPane.showMessageDialog(null, "Logado com sucesso");
-            setLogado(true);
+            System.out.println("LOG STATUS | Setando telaLogin invisivel...");
+            this.setVisible(false);
+            view.FrmPrincipal principal = new view.FrmPrincipal();
+            principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            principal.setVisible(true);
         } else {
             //Usuario não encontrado
             System.out.println("LOG STATUS | Usuário não encontrado!");
             JOptionPane.showMessageDialog(null, "Usuário e senha incorretos!");
-            setLogado(false);
         }
     }//GEN-LAST:event_jBtnLoginMouseClicked
 
