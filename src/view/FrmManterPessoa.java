@@ -186,7 +186,7 @@ public class FrmManterPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtSobrenomeActionPerformed
 
     private void jBtnIncluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnIncluirMouseClicked
-        if (validaCampos() == 1) {
+        if (validarCampos() == 1) {
            pessoa = new Pessoa();
            pessoa.setNome(jTxtNome.getText());
            pessoa.setSobrenome(jTxtSobrenome.getText());
@@ -211,7 +211,7 @@ public class FrmManterPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtUsuarioActionPerformed
 
     private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
-        if (validaCampos() == 1) {
+        if (validarCampos() == 1) {
         pessoa = (Pessoa) jLstPessoas.getSelectedValue();
         if (pessoa != null) {
             if (ctrManterPessoa.excluirPessoas(pessoa)) {
@@ -242,7 +242,7 @@ public class FrmManterPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jLstPessoasMouseClicked
 
     private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
-        if (validaCampos() == 1) {
+        if (validarCampos() == 1) {
         pessoa = (Pessoa) jLstPessoas.getSelectedValue();
          if (pessoa != null) {
               jTxtNome.setText(pessoa.getNome());
@@ -278,7 +278,7 @@ public class FrmManterPessoa extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_formWindowActivated
 
-    public int validaCampos() {
+    public int validarCampos() {
         System.out.println("LOG STATUS | Entrando no metodo de validação de campos...");
         System.out.println("LOG STATUS | jTxtNome: " + jTxtNome.getText());
         System.out.println("LOG STATUS | jTxtSobrenome: " + jTxtSobrenome.getText());

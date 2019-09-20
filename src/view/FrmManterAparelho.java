@@ -216,7 +216,7 @@ public class FrmManterAparelho extends javax.swing.JFrame {
     }//GEN-LAST:event_jCbxComodosMouseClicked
 
     private void jBtnIncluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnIncluirMouseClicked
-           
+        if (validarCampos() == 1) {   
         comodo = (Comodo) jCbxComodos.getSelectedItem();
         aparelho = new Aparelho();
         // atribui valores
@@ -233,11 +233,12 @@ public class FrmManterAparelho extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Aparelho não cadastrado");
         }
-        
+        }
     }//GEN-LAST:event_jBtnIncluirMouseClicked
 
     private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
-       comodo = (Comodo) jCbxComodos.getSelectedItem();
+       if (validarCampos() == 1) {   
+        comodo = (Comodo) jCbxComodos.getSelectedItem();
           
             if (aparelho != null) {
                 //atribui os valores
@@ -257,6 +258,7 @@ public class FrmManterAparelho extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Aparelho não localizada!");
             }
+       }
     }//GEN-LAST:event_jBtnAlterarMouseClicked
 
     private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
@@ -295,6 +297,18 @@ public class FrmManterAparelho extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jLstAparelhoMouseClicked
 
+    public int validarCampos() {
+        System.out.println("LOG STATUS | Entrando no metodo de validação de campos...");
+        System.out.println("LOG STATUS | jTxtNome: " + jTxtNome.getText());
+        System.out.println("LOG STATUS | jTxtDescricao: " + jTxtDescricao.getText());
+        if (jTxtNome.getText().isEmpty() ||  jTxtDescricao.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Favor Preencher Todos Os Campos!");
+            return 2;
+        } else {
+            return 1;
+        }
+    }    
+    
     /**
      * @param args the command line arguments
      */

@@ -222,25 +222,24 @@ public class FrmManterComodo extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnExcluirMouseClicked
 
     private void jBtnIncluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnIncluirMouseClicked
-        casa = (Casa) jCbxCasa.getSelectedItem();
-        comodo = new Comodo();
-        // atribui valores
-       comodo.setNome(jTxtQuarto.getText());
-       int andar = Integer.parseInt(jTxtAndar.getText());
-       comodo.setAndar(andar);
-       comodo.setCasaId(casa);
+        if (validarCampos() == 1) {
+            casa = (Casa) jCbxCasa.getSelectedItem();
+            comodo = new Comodo();
+            // atribui valores
+            comodo.setNome(jTxtQuarto.getText());
+            int andar = Integer.parseInt(jTxtAndar.getText());
+            comodo.setAndar(andar);
+            comodo.setCasaId(casa);
        
-       if(ctrManterComodo.gravarComodo(comodo) == 1){
-             comodo.setNome("");
-             comodo.setAndar(0);
-            JOptionPane.showMessageDialog(null, "Cômodo cadastrado");         
- }
-          else{
-     JOptionPane.showMessageDialog(null, "Cômodo não cadastrado");
-    
-    }
-
-        
+            if(ctrManterComodo.gravarComodo(comodo) == 1){
+                comodo.setNome("");
+                comodo.setAndar(0);
+                JOptionPane.showMessageDialog(null, "Cômodo cadastrado");         
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Cômodo não cadastrado");
+            }
+        }
     }//GEN-LAST:event_jBtnIncluirMouseClicked
 
     private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
@@ -325,16 +324,30 @@ public class FrmManterComodo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
-    public int validaCampos() {
+    public int validarCampos() {
         System.out.println("LOG STATUS | Entrando no metodo de validação de campos...");
         System.out.println("LOG STATUS | jTxtComodo: " + jTxtQuarto.getText());
         System.out.println("LOG STATUS | jTxtAndar: " + jTxtAndar.getText());
+        
+        if (!isNumeric(jTxtAndar.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor não númerico para andar!");
+        }
+        
         if (jTxtQuarto.getText().isEmpty() ||  jTxtAndar.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Favor Preencher Todos Os Campos!");
             return 2;
         } else {
             return 1;
         }
+    }
+    
+    public static boolean isNumeric(String strNum) {
+        try {
+           int num = Integer.parseInt(strNum);
+        } catch (NumberFormatException | NullPointerException nfe) {
+            return false;
+        }
+        return true;
     }
     
     /**

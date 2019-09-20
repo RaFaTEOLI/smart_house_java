@@ -230,7 +230,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtCepActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        if (validaCampos() == 1) {
+        if (validarCampos() == 1) {
         pessoa = (Pessoa) jCbxProprietarios.getSelectedItem();
         casa = new Casa();
         // atribui valores
@@ -257,7 +257,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnExcluirMouseClicked
-        if (validaCampos() == 1) {
+        if (validarCampos() == 1) {
         //recupera a casa selecionado
         casa = (Casa) jLstCasas.getSelectedValue();
         //exclui o funcionario
@@ -307,7 +307,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jBtnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAlterarMouseClicked
-        if (validaCampos() == 1) {
+        if (validarCampos() == 1) {
             
             casa = (Casa) jLstCasas.getSelectedValue();
             pessoa = (Pessoa) jCbxProprietarios.getSelectedItem();
@@ -359,7 +359,7 @@ public class FrmManterCasa extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jLstCasasMouseClicked
 
-    public int validaCampos() {
+    public int validarCampos() {
         System.out.println("LOG STATUS | Entrando no metodo de validação de campos...");
         System.out.println("LOG STATUS | jTxtNome: " + jTxtNome.getText());
         System.out.println("LOG STATUS | jTxtEndereco: " + jTxtEndereco.getText());
