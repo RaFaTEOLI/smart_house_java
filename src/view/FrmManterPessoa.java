@@ -245,10 +245,10 @@ public class FrmManterPessoa extends javax.swing.JFrame {
         if (validarCampos() == 1) {
         pessoa = (Pessoa) jLstPessoas.getSelectedValue();
          if (pessoa != null) {
-              jTxtNome.setText(pessoa.getNome());
-              jTxtSobrenome.setText(pessoa.getSobrenome());
-              jTxtUsuario.setText(pessoa.getUsuario());
-              jPasswordSenha.setText(pessoa.getSenha());  
+            pessoa.setNome(jTxtNome.getText());
+            pessoa.setSobrenome(jTxtSobrenome.getText());
+            pessoa.setUsuario(jTxtUsuario.getText());
+            pessoa.setSenha(jPasswordSenha.getText());
             if (ctrManterPessoa.alterarPessoa(pessoa)) {
                 jTxtNome.setText("");
                 jTxtSobrenome.setText("");
